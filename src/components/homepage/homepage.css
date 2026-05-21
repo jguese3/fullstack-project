@@ -1,0 +1,288 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap");
+
+/* ── Variables ─────────────────────────────────────────────── */
+.homepage {
+  --cl-dark: #0d0f14;
+  --cl-surface: #161a24;
+  --cl-border: #252b3b;
+  --cl-gold: #e8b04b;
+  --cl-gold-dim: rgba(232, 176, 75, 0.12);
+  --cl-text: #e8eaf0;
+  --cl-muted: #7a8099;
+  --cl-red: #e85454;
+
+  font-family: "DM Sans", sans-serif;
+  background-color: var(--cl-dark);
+  color: var(--cl-text);
+  min-height: 100vh;
+  padding: 0 0 4rem;
+}
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.homepage__hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 5rem 3rem 4rem;
+  border-bottom: 1px solid var(--cl-border);
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 40%, rgba(232, 176, 75, 0.08) 0%, transparent 70%),
+    var(--cl-dark);
+  flex-wrap: wrap;
+}
+
+.homepage__hero-content {
+  max-width: 640px;
+}
+
+.homepage__hero-eyebrow {
+  font-family: "DM Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cl-gold);
+  margin: 0 0 1rem;
+}
+
+.homepage__hero-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 1.25rem;
+  color: var(--cl-text);
+}
+
+.homepage__hero-accent {
+  color: var(--cl-gold);
+  font-style: italic;
+}
+
+.homepage__hero-subtitle {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--cl-muted);
+  margin: 0 0 2rem;
+  max-width: 480px;
+}
+
+.homepage__hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.homepage__btn {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.homepage__btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.homepage__btn--primary {
+  background-color: var(--cl-gold);
+  color: #0d0f14;
+}
+
+.homepage__btn--secondary {
+  background-color: transparent;
+  color: var(--cl-text);
+  border: 1px solid var(--cl-border);
+}
+
+.homepage__hero-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  height: 110px;
+  border: 1px solid var(--cl-gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.homepage__hero-badge-number {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cl-gold);
+  line-height: 1;
+}
+
+.homepage__hero-badge-label {
+  font-family: "DM Mono", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--cl-muted);
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 0.3rem;
+}
+
+/* ── Genre Section ─────────────────────────────────────────── */
+.homepage__genre-section {
+  padding: 3rem 3rem 1.5rem;
+}
+
+.homepage__section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cl-text);
+  margin: 0 0 1.25rem;
+}
+
+.homepage__genre-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.homepage__genre-item {
+  display: inline;
+}
+
+.homepage__genre-btn {
+  font-family: "DM Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 1.1rem;
+  background-color: var(--cl-surface);
+  color: var(--cl-muted);
+  border: 1px solid var(--cl-border);
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.homepage__genre-btn:hover {
+  background-color: var(--cl-gold-dim);
+  color: var(--cl-gold);
+  border-color: var(--cl-gold);
+}
+
+/* ── Featured Movies Grid ──────────────────────────────────── */
+.homepage__featured {
+  padding: 2rem 3rem 0;
+}
+
+.homepage__movies-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.homepage__movie-card {
+  background-color: var(--cl-surface);
+  border: 1px solid var(--cl-border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.homepage__movie-card:hover {
+  border-color: var(--cl-gold);
+  transform: translateY(-3px);
+}
+
+.homepage__movie-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.homepage__movie-genre {
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cl-gold);
+  background-color: var(--cl-gold-dim);
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+}
+
+.homepage__movie-rating {
+  font-family: "DM Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--cl-gold);
+}
+
+.homepage__movie-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cl-text);
+  margin: 0.25rem 0 0;
+  line-height: 1.3;
+}
+
+.homepage__movie-year {
+  font-family: "DM Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--cl-muted);
+  margin: 0;
+}
+
+.homepage__movie-description {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--cl-muted);
+  margin: 0.25rem 0 0.5rem;
+  flex: 1;
+}
+
+.homepage__movie-btn {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  background-color: transparent;
+  color: var(--cl-gold);
+  border: 1px solid var(--cl-gold);
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: auto;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.homepage__movie-btn:hover {
+  background-color: var(--cl-gold);
+  color: var(--cl-dark);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .homepage__hero {
+    padding: 3rem 1.5rem 2.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .homepage__genre-section,
+  .homepage__featured {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
