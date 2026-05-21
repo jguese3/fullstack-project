@@ -1,0 +1,27 @@
+.my-movies {
+  padding: 32px;
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.my-movies h2 {
+  color: #cc0000;
+  font-size: 32px;
+}
+
+.movie-card-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.movie-card {
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f4f4f4;
+}
+
+.movie-card h3 {
+  color: #1a1a8f;
+}

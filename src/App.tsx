@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import './App.css'
-// import Homepage from "./components/homepage/Homepage";
+import MyMovies from './components/my-movies/MyMovies'
 
 function App() {
+  const [page, setPage] = useState('home')
+
   return (
     <div className="app">
       <header className="navbar">
@@ -10,26 +13,48 @@ function App() {
         <nav>
           <ul className="nav-links">
             <li>
-              <a href="/">Home</a>
+              <button onClick={() => setPage('home')}>
+                Home
+              </button>
             </li>
 
             <li>
-              <a href="/">All Movies</a>
+              <button onClick={() => setPage('all')}>
+                All Movies
+              </button>
             </li>
 
             <li>
-              <a href="/">My Movies</a>
+              <button onClick={() => setPage('my')}>
+                My Movies
+              </button>
             </li>
           </ul>
         </nav>
       </header>
 
       <main className="main-content">
-        <h2>Welcome to MovieFlix</h2>
+        {page === 'home' && (
+          <>
+            <h2>Welcome to MovieFlix</h2>
 
-        <p>
-          Discover and manage your favorite movies in one place.
-        </p>
+            <p>
+              Discover and manage your favorite movies in one place.
+            </p>
+          </>
+        )}
+
+        {page === 'all' && (
+          <>
+            <h2>All Movies</h2>
+
+            <p>
+              Browse all available movies in the platform.
+            </p>
+          </>
+        )}
+
+        {page === 'my' && <MyMovies />}
       </main>
 
       <footer className="footer">
