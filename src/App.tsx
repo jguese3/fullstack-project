@@ -13,19 +13,28 @@ function App() {
         <nav>
           <ul className="nav-links">
             <li>
-              <button onClick={() => setPage('home')}>
+              <button
+                className={page === 'home' ? 'active-link' : ''}
+                onClick={() => setPage('home')}
+              >
                 Home
               </button>
             </li>
 
             <li>
-              <button onClick={() => setPage('all')}>
+              <button
+                className={page === 'all' ? 'active-link' : ''}
+                onClick={() => setPage('all')}
+              >
                 All Movies
               </button>
             </li>
 
             <li>
-              <button onClick={() => setPage('my')}>
+              <button
+                className={page === 'my' ? 'active-link' : ''}
+                onClick={() => setPage('my')}
+              >
                 My Movies
               </button>
             </li>
