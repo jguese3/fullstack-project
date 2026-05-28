@@ -5,7 +5,7 @@ function MyMovies() {
   const [movieTitle, setMovieTitle] = useState('')
   const [movieGenre, setMovieGenre] = useState('')
 
-  const movies = [
+  const [movies, setMovies] = useState([
     {
       id: 1,
       title: 'Game of Thrones',
@@ -24,13 +24,25 @@ function MyMovies() {
       genre: 'Animation',
       status: 'Saved',
     },
-  ]
+  ])
 
-  function handleSubmit(event: any) {
+  function handleAddMovie(event: any) {
     event.preventDefault()
 
+    const newMovie = {
+      id: Date.now(),
+      title: movieTitle,
+      genre: movieGenre,
+      status: 'Saved',
+    }
+
+    setMovies([...movies, newMovie])
     setMovieTitle('')
     setMovieGenre('')
+  }
+
+  function handleRemoveMovie(id: number) {
+    setMovies(movies.filter((movie) => movie.id !== id))
   }
 
   return (
@@ -39,7 +51,7 @@ function MyMovies() {
 
       <p>These are movies saved in the user's personal movie collection.</p>
 
-      <form className="movie-form" onSubmit={handleSubmit}>
+      <form className="movie-form" onSubmit={handleAddMovie}>
         <label htmlFor="movie-title">Movie Title</label>
 
         <input
@@ -67,8 +79,18 @@ function MyMovies() {
         {movies.map((movie) => (
           <article className="movie-card" key={movie.id}>
             <h3>{movie.title}</h3>
+
             <p>Genre: {movie.genre}</p>
+
             <p>Status: {movie.status}</p>
+
+            <button
+              type="button"
+              className="remove-button"
+              onClick={() => handleRemoveMovie(movie.id)}
+            >
+              Remove
+            </button>
           </article>
         ))}
       </div>

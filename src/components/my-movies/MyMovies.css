@@ -45,7 +45,8 @@
   font-size: 16px;
 }
 
-.movie-form button {
+.movie-form button,
+.remove-button {
   padding: 10px 14px;
   border: none;
   border-radius: 6px;
@@ -53,4 +54,8 @@
   color: #ffffff;
   font-size: 16px;
   cursor: pointer;
+}
+
+.remove-button {
+  margin-top: 10px;
 }
