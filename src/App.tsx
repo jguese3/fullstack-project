@@ -1,78 +1,40 @@
-import { useState } from 'react'
-import './App.css'
-import MyMovies from './components/my-movies/MyMovies'
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { WatchlistMovie } from "./types";
+import Layout from "./components/layout/Layout";
+import Homepage from "./components/homepage/Homepage";
+import AllMovies from "./components/all-movies/AllMovies";
+import MyMovies from "./components/my-movies/MyMovies";
+import "./App.css";
 
-function App() {
-  const [page, setPage] = useState('home')
+export default function App() {
+  // T.3: Shared state initialized at top-level, passed to all pages
+  const [watchlist, setWatchlist] = useState<WatchlistMovie[]>([]);
 
   return (
-    <div className="app">
-      <header className="navbar">
-        <h1 className="logo">MovieFlix</h1>
-
-        <nav>
-          <ul className="nav-links">
-            <li>
-              <button
-                className={page === 'home' ? 'active-link' : ''}
-                onClick={() => setPage('home')}
-              >
-                Home
-              </button>
-            </li>
-
-            <li>
-              <button
-                className={page === 'all' ? 'active-link' : ''}
-                onClick={() => setPage('all')}
-              >
-                All Movies
-              </button>
-            </li>
-
-            <li>
-              <button
-                className={page === 'my' ? 'active-link' : ''}
-                onClick={() => setPage('my')}
-              >
-                My Movies
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </header>
-
-      <main className="main-content">
-        {page === 'home' && (
-          <>
-            <h2>Welcome to MovieFlix</h2>
-
-            <p>
-              Discover and manage your favorite movies in one place.
-            </p>
-          </>
-        )}
-
-        {page === 'all' && (
-          <>
-            <h2>All Movies</h2>
-
-            <p>
-              Browse all available movies in the platform.
-            </p>
-          </>
-        )}
-
-        {page === 'my' && <MyMovies />}
-      </main>
-
-      <footer className="footer">
-        <p>
-          Group Members: Navpreet Singh, Rajandeep Kaur, Jarone Guese
-        </p>
-      </footer>
-    </div>
-  )
+    <BrowserRouter>
+      <Layout watchlistCount={watchlist.length}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Homepage watchlist={watchlist} setWatchlist={setWatchlist} />
+            }
+          />
+          <Route
+            path="/all-movies"
+            element={
+              <AllMovies watchlist={watchlist} setWatchlist={setWatchlist} />
+            }
+          />
+          <Route
+            path="/my-movies"
+            element={
+              <MyMovies watchlist={watchlist} setWatchlist={setWatchlist} />
+            }
+          />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
+  );
 }
-
-export default App
