@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import './MyMovies.css'
 
+import gameOfThrones from '../../assets/gameofthrones.jpg'
+import spiderMan from '../../assets/spiderman.jpg'
+import insideOut from '../../assets/insideout.jpg'
+
 function MyMovies() {
   const [movieTitle, setMovieTitle] = useState('')
   const [movieGenre, setMovieGenre] = useState('')
@@ -11,18 +15,21 @@ function MyMovies() {
       title: 'Game of Thrones',
       genre: 'Thriller',
       status: 'Watched',
+      image: gameOfThrones,
     },
     {
       id: 2,
       title: 'Spider-Man: No Way Home',
       genre: 'Superhero',
       status: 'Watching',
+      image: spiderMan,
     },
     {
       id: 3,
       title: 'Inside Out',
       genre: 'Animation',
       status: 'Saved',
+      image: insideOut,
     },
   ])
 
@@ -34,6 +41,7 @@ function MyMovies() {
       title: movieTitle,
       genre: movieGenre,
       status: 'Saved',
+      image: insideOut,
     }
 
     setMovies([...movies, newMovie])
@@ -49,7 +57,9 @@ function MyMovies() {
     <section className="my-movies" aria-labelledby="my-movies-heading">
       <h2 id="my-movies-heading">My Movies</h2>
 
-      <p>These are movies saved in the user's personal movie collection.</p>
+      <p>
+        These are movies saved in the user's personal movie collection.
+      </p>
 
       <form className="movie-form" onSubmit={handleAddMovie}>
         <label htmlFor="movie-title">Movie Title</label>
@@ -78,19 +88,27 @@ function MyMovies() {
       <div className="movie-card-list">
         {movies.map((movie) => (
           <article className="movie-card" key={movie.id}>
-            <h3>{movie.title}</h3>
+            <img
+              src={movie.image}
+              alt={movie.title}
+              className="movie-image"
+            />
 
-            <p>Genre: {movie.genre}</p>
+            <div className="movie-info">
+              <h3>{movie.title}</h3>
 
-            <p>Status: {movie.status}</p>
+              <p>Genre: {movie.genre}</p>
 
-            <button
-              type="button"
-              className="remove-button"
-              onClick={() => handleRemoveMovie(movie.id)}
-            >
-              Remove
-            </button>
+              <p>Status: {movie.status}</p>
+
+              <button
+                type="button"
+                className="remove-button"
+                onClick={() => handleRemoveMovie(movie.id)}
+              >
+                Remove
+              </button>
+            </div>
           </article>
         ))}
       </div>
