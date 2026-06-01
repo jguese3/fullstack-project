@@ -18,8 +18,19 @@
 .movie-card {
   border: 1px solid #dcdcdc;
   border-radius: 8px;
-  padding: 16px;
+  padding: 20px;
   background-color: #f4f4f4;
+
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.movie-info {
+  text-align: center;
+  margin-right: 100px;
 }
 
 .movie-card h3 {
@@ -58,4 +69,11 @@
 
 .remove-button {
   margin-top: 10px;
+}
+
+.movie-image {
+  width: 120px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
 }
