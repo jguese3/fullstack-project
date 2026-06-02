@@ -1,0 +1,9 @@
+.movie-card {
+    max-width: 100%;
+}
+
+.movie-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
