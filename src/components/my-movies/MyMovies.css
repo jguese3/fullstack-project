@@ -1,159 +1,151 @@
+/* Team theme — STYLEGUIDE.MD / develop branch */
+
 .my-movies {
-  padding: 3rem;
-  font-family: "DM Sans", sans-serif;
-  color: var(--cl-text);
+  padding: 32px;
+  background-color: #ffffff;
+  color: #333333;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .my-movies__header {
-  margin-bottom: 2rem;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 .my-movies__title {
-  font-family: "Playfair Display", serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 0 0 0.4rem;
+  color: #cc0000;
+  font-size: 32px;
+  margin: 0 0 8px;
 }
 
 .my-movies__subtitle {
-  color: var(--cl-muted);
-  font-size: 0.95rem;
+  color: #333333;
+  font-size: 24px;
   margin: 0;
 }
 
-/* Stats */
 .my-movies__stats {
   list-style: none;
   padding: 0;
-  margin: 0 0 2rem;
+  margin: 0 0 24px;
   display: flex;
-  gap: 0.75rem;
+  gap: 12px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .my-movies__stat-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 1.5rem;
-  background-color: var(--cl-surface);
-  border: 1px solid var(--cl-border);
-  border-radius: 6px;
+  padding: 16px 20px;
+  background-color: #f4f4f4;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
   cursor: pointer;
-  transition: border-color 0.2s;
   min-width: 90px;
 }
 
 .my-movies__stat-btn:hover,
 .my-movies__stat-btn--active {
-  border-color: var(--cl-gold);
+  border-color: #cc0000;
 }
 
 .my-movies__stat-num {
-  font-family: "Playfair Display", serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--cl-gold);
+  font-size: 28px;
+  font-weight: bold;
+  color: #cc0000;
   line-height: 1;
 }
 
 .my-movies__stat-label {
-  font-family: "DM Mono", monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.06em;
-  color: var(--cl-muted);
-  margin-top: 0.3rem;
+  font-size: 14px;
+  color: #333333;
+  margin-top: 4px;
   text-align: center;
 }
 
-/* Empty */
 .my-movies__empty {
   text-align: center;
-  padding: 5rem 2rem;
-  color: var(--cl-muted);
+  padding: 80px 20px;
+  color: #333333;
 }
 
 .my-movies__empty-icon {
-  font-size: 3rem;
-  margin: 0 0 1rem;
+  font-size: 48px;
+  margin: 0 0 16px;
 }
 
 .my-movies__empty-text {
-  font-size: 1.1rem;
-  margin: 0 0 0.4rem;
-  color: var(--cl-text);
+  font-size: 24px;
+  margin: 0 0 8px;
+  color: #444444;
 }
 
 .my-movies__empty-hint {
-  font-size: 0.875rem;
+  font-size: 18px;
   margin: 0;
+  color: #333333;
 }
 
 .my-movies__no-results {
-  color: var(--cl-muted);
-  font-size: 0.95rem;
-  padding: 2rem 0;
+  color: #333333;
+  font-size: 24px;
+  padding: 32px 0;
+  text-align: center;
 }
 
-/* List */
 .my-movies__list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .my-movies__item {
-  background-color: var(--cl-surface);
-  border: 1px solid var(--cl-border);
-  border-radius: 6px;
-  padding: 1.25rem 1.5rem;
+  background-color: #f4f4f4;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 20px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 16px;
   flex-wrap: wrap;
-  transition: border-color 0.2s;
-}
-
-.my-movies__item:hover {
-  border-color: var(--cl-gold);
 }
 
 .my-movies__item-left {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
   flex: 1;
   min-width: 200px;
 }
 
 .my-movies__item-poster {
-  font-size: 2.2rem;
+  font-size: 36px;
   flex-shrink: 0;
 }
 
 .my-movies__item-title {
-  font-family: "Playfair Display", serif;
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin: 0 0 0.2rem;
-  color: var(--cl-text);
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 4px;
+  color: #1a1a8f;
 }
 
 .my-movies__item-meta {
-  font-family: "DM Mono", monospace;
-  font-size: 0.7rem;
-  color: var(--cl-muted);
+  font-size: 16px;
+  color: #333333;
   margin: 0;
 }
 
 .my-movies__item-right {
   display: flex;
   align-items: flex-end;
-  gap: 0.75rem;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
@@ -161,91 +153,71 @@
 .my-movies__note-group {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 4px;
 }
 
 .my-movies__status-label {
-  font-family: "DM Mono", monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cl-muted);
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
 }
 
 .my-movies__status-select {
-  background-color: var(--cl-dark);
-  border: 1px solid var(--cl-border);
-  border-radius: 4px;
-  color: var(--cl-text);
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.82rem;
-  padding: 0.45rem 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  color: #333333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  padding: 10px;
   outline: none;
   cursor: pointer;
-  transition: border-color 0.2s;
 }
 
 .my-movies__status-select:focus {
-  border-color: var(--cl-gold);
-}
-
-.my-movies__status-select--watched {
-  border-color: #4caf7d;
-  color: #4caf7d;
-}
-
-.my-movies__status-select--watching {
-  border-color: var(--cl-gold);
-  color: var(--cl-gold);
-}
-
-.my-movies__status-select--plan-to-watch {
-  border-color: var(--cl-muted);
+  border-color: #1a1a8f;
 }
 
 .my-movies__note-input {
-  background-color: var(--cl-dark);
-  border: 1px solid var(--cl-border);
-  border-radius: 4px;
-  color: var(--cl-text);
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.82rem;
-  padding: 0.45rem 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  color: #333333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  padding: 10px;
   outline: none;
   width: 180px;
-  transition: border-color 0.2s;
 }
 
 .my-movies__note-input:focus {
-  border-color: var(--cl-gold);
+  border-color: #1a1a8f;
 }
 
 .my-movies__note-input::placeholder {
-  color: var(--cl-muted);
+  color: #666666;
 }
 
 .my-movies__remove-btn {
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.45rem 0.9rem;
-  background-color: transparent;
-  color: #e85454;
-  border: 1px solid #e85454;
-  border-radius: 4px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 14px;
+  background-color: #cc0000;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
   white-space: nowrap;
 }
 
 .my-movies__remove-btn:hover {
-  background-color: #e85454;
-  color: white;
+  opacity: 0.9;
 }
 
 @media (max-width: 640px) {
   .my-movies {
-    padding: 2rem 1.5rem;
+    padding: 20px 16px;
   }
 
   .my-movies__item {

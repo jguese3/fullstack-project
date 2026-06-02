@@ -2,32 +2,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 3rem;
-  background-color: rgba(13, 15, 20, 0.95);
-  border-bottom: 1px solid var(--cl-border);
+  padding: 20px 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dcdcdc;
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(10px);
 }
 
 .nav__brand {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
   text-decoration: none;
 }
 
-.nav__logo {
-  font-size: 1.4rem;
-}
-
 .nav__title {
-  font-family: "Playfair Display", serif;
-  font-size: 1.4rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 48px;
   font-weight: 700;
-  color: var(--cl-gold);
-  letter-spacing: 0.02em;
+  color: #cc0000;
+  margin: 0;
 }
 
 .nav__links {
@@ -35,41 +29,40 @@
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 0.5rem;
+  gap: 30px;
   align-items: center;
 }
 
 .nav__link {
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--cl-muted);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  color: #1a1a8f;
   text-decoration: none;
-  padding: 0.45rem 1rem;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  transition: color 0.2s, border-color 0.2s;
+  padding: 0;
+  border: none;
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  transition: color 0.2s;
 }
 
 .nav__link:hover {
-  color: var(--cl-text);
+  color: #cc0000;
 }
 
 .nav__link--active {
-  color: var(--cl-gold);
-  border-color: var(--cl-border);
-  background-color: var(--cl-surface);
+  color: #cc0000;
+  font-weight: bold;
+  background: none;
+  border: none;
 }
 
 .nav__badge {
-  background-color: var(--cl-gold);
-  color: #0d0f14;
-  font-family: "DM Mono", monospace;
-  font-size: 0.65rem;
-  font-weight: 700;
+  background-color: #cc0000;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
   padding: 0.1rem 0.45rem;
   border-radius: 1rem;
   min-width: 18px;
@@ -78,17 +71,20 @@
 
 @media (max-width: 640px) {
   .nav {
-    padding: 1rem 1.25rem;
+    padding: 16px 20px;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 12px;
+  }
+
+  .nav__title {
+    font-size: 36px;
   }
 
   .nav__links {
-    gap: 0.25rem;
+    gap: 16px;
   }
 
   .nav__link {
-    font-size: 0.82rem;
-    padding: 0.4rem 0.75rem;
+    font-size: 16px;
   }
 }

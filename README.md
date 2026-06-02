@@ -1,8 +1,8 @@
-# 🎬 CineLog — Movie Catalogue App
+# 🎬 MovieFlix — Movie Catalogue App
 
 ## Team
 
-**Team Name:** CineLog Crew
+**Team Name:** MovieFlix Crew
 
 | Member | Role |
 |---|---|
@@ -14,7 +14,7 @@
 
 ## Project Description
 
-CineLog is a movie catalogue application that allows users to discover, track, and manage their personal movie collections.
+MovieFlix is a movie catalogue application that allows users to discover, track, and manage their personal movie collections.
 
 ### User Stories
 
@@ -30,7 +30,7 @@ CineLog is a movie catalogue application that allows users to discover, track, a
 
 ## Project Overview
 
-CineLog is built with React + TypeScript using Vite as the build tool. It features a public movie catalogue browsable by all visitors, and a personal movie management experience for logged-in users.
+MovieFlix is built with React + TypeScript using Vite as the build tool. It features a public movie catalogue browsable by all visitors, and a personal movie management experience for logged-in users.
 
 ### Pages
 

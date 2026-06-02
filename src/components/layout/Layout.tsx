@@ -16,7 +16,7 @@ export default function Layout({ children, watchlistCount }: LayoutProps) {
       <main className="layout__main">{children}</main>
       <footer className="layout__footer">
         <p className="layout__footer-text">
-          CineLog &copy; 2025 &mdash; Navpreet Singh &bull; Jarone Guese &bull; Rajandeep Kaur
+          Group Members: Navpreet Singh, Rajandeep Kaur, Jarone Guese
         </p>
       </footer>
     </div>

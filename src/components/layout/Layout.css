@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--cl-dark);
+  background-color: #f4f4f4;
 }
 
 .layout__header {
@@ -14,15 +14,15 @@
 }
 
 .layout__footer {
-  border-top: 1px solid var(--cl-border);
-  padding: 1.5rem 3rem;
+  background-color: #ffffff;
+  border-top: 1px solid #dcdcdc;
+  padding: 20px;
   text-align: center;
 }
 
 .layout__footer-text {
-  font-family: "DM Mono", monospace;
-  font-size: 0.72rem;
-  color: var(--cl-muted);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #333333;
   margin: 0;
-  letter-spacing: 0.04em;
 }

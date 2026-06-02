@@ -51,7 +51,7 @@ export default function Homepage({ watchlist, setWatchlist }: HomepageProps) {
           </h1>
           <p className="homepage__hero-subtitle">
             Browse thousands of films, build your watchlist, and share your
-            reviews with the CineLog community.
+            reviews with the MovieFlix community.
           </p>
           <div className="homepage__hero-actions">
             <button
