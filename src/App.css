@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap");
 
 /* ── Global CSS Variables ─────────────────────────────────── */
@@ -17,10 +18,45 @@
 *::before,
 *::after {
   box-sizing: border-box;
+=======
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f4f4;
+  color: #333333;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background-color: #ffffff;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.logo {
+  color: #cc0000;
+  margin: 0;
+  font-size: 48px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
   margin: 0;
   padding: 0;
 }
 
+<<<<<<< HEAD
 html {
   font-size: 16px;
   scroll-behavior: smooth;
@@ -73,3 +109,39 @@ textarea {
   outline: 2px solid var(--cl-gold);
   outline-offset: 2px;
 }
+=======
+.nav-links a {
+  text-decoration: none;
+  color: #1a1a8f;
+  font-size: 18px;
+}
+
+.nav-links a:hover {
+  color: #cc0000;
+}
+
+.main-content {
+  flex: 1;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.main-content h2 {
+  font-size: 56px;
+  margin-bottom: 20px;
+  color: #444444;
+}
+
+.main-content p {
+  font-size: 24px;
+  color: #444444;
+}
+
+.footer {
+  background-color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #dcdcdc;
+  color: #333333;
+}
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
