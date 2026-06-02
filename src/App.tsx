@@ -1,48 +1,10 @@
-<<<<<<< HEAD
-import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { WatchlistMovie } from "./types";
-import Layout from "./components/layout/Layout";
-import Homepage from "./components/homepage/Homepage";
-import AllMovies from "./components/all-movies/AllMovies";
-import MyMovies from "./components/my-movies/MyMovies";
-
-export default function App() {
-  // T.3: Shared state initialized at top-level, passed to all pages
-  const [watchlist, setWatchlist] = useState<WatchlistMovie[]>([]);
-
-  return (
-    <BrowserRouter>
-      <Layout watchlistCount={watchlist.length}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Homepage watchlist={watchlist} setWatchlist={setWatchlist} />
-            }
-          />
-          <Route
-            path="/all-movies"
-            element={
-              <AllMovies watchlist={watchlist} setWatchlist={setWatchlist} />
-            }
-          />
-          <Route
-            path="/my-movies"
-            element={
-              <MyMovies watchlist={watchlist} setWatchlist={setWatchlist} />
-            }
-          />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
-  );
-}
-=======
+import { useState } from 'react'
 import './App.css'
-// import Homepage from "./components/homepage/Homepage";
+import MyMovies from './components/my-movies/MyMovies'
 
 function App() {
+  const [page, setPage] = useState('home')
+
   return (
     <div className="app">
       <header className="navbar">
@@ -51,26 +13,57 @@ function App() {
         <nav>
           <ul className="nav-links">
             <li>
-              <a href="/">Home</a>
+              <button
+                className={page === 'home' ? 'active-link' : ''}
+                onClick={() => setPage('home')}
+              >
+                Home
+              </button>
             </li>
 
             <li>
-              <a href="/">All Movies</a>
+              <button
+                className={page === 'all' ? 'active-link' : ''}
+                onClick={() => setPage('all')}
+              >
+                All Movies
+              </button>
             </li>
 
             <li>
-              <a href="/">My Movies</a>
+              <button
+                className={page === 'my' ? 'active-link' : ''}
+                onClick={() => setPage('my')}
+              >
+                My Movies
+              </button>
             </li>
           </ul>
         </nav>
       </header>
 
       <main className="main-content">
-        <h2>Welcome to MovieFlix</h2>
+        {page === 'home' && (
+          <>
+            <h2>Welcome to MovieFlix</h2>
 
-        <p>
-          Discover and manage your favorite movies in one place.
-        </p>
+            <p>
+              Discover and manage your favorite movies in one place.
+            </p>
+          </>
+        )}
+
+        {page === 'all' && (
+          <>
+            <h2>All Movies</h2>
+
+            <p>
+              Browse all available movies in the platform.
+            </p>
+          </>
+        )}
+
+        {page === 'my' && <MyMovies />}
       </main>
 
       <footer className="footer">
@@ -83,4 +76,4 @@ function App() {
 }
 
 export default App
->>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
+

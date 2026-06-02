@@ -1,158 +1,119 @@
-import { useState } from "react";
-import { WatchlistMovie, WatchStatus } from "../../types";
-import "./MyMovies.css";
+import { useState } from 'react'
+import './MyMovies.css'
 
-interface MyMoviesProps {
-  watchlist: WatchlistMovie[];
-  setWatchlist: React.Dispatch<React.SetStateAction<WatchlistMovie[]>>;
-}
+import gameOfThrones from '../../assets/gameofthrones.jpg'
+import spiderMan from '../../assets/spiderman.jpg'
+import insideOut from '../../assets/insideout.jpg'
 
-const STATUS_LABELS: Record<WatchStatus, string> = {
-  "watched": "✅ Watched",
-  "watching": "▶️ Watching",
-  "plan-to-watch": "📋 Plan to Watch",
-};
+function MyMovies() {
+  const [movieTitle, setMovieTitle] = useState('')
+  const [movieGenre, setMovieGenre] = useState('')
 
-const STATUS_OPTIONS: WatchStatus[] = ["plan-to-watch", "watching", "watched"];
+  const [movies, setMovies] = useState([
+    {
+      id: 1,
+      title: 'Game of Thrones',
+      genre: 'Thriller',
+      status: 'Watched',
+      image: gameOfThrones,
+    },
+    {
+      id: 2,
+      title: 'Spider-Man: No Way Home',
+      genre: 'Superhero',
+      status: 'Watching',
+      image: spiderMan,
+    },
+    {
+      id: 3,
+      title: 'Inside Out',
+      genre: 'Animation',
+      status: 'Saved',
+      image: insideOut,
+    },
+  ])
 
-export default function MyMovies({ watchlist, setWatchlist }: MyMoviesProps) {
-  const [filterStatus, setFilterStatus] = useState<WatchStatus | "all">("all");
-  const [noteInputs, setNoteInputs] = useState<Record<number, string>>({});
+  function handleAddMovie(event: any) {
+    event.preventDefault()
 
-  const handleRemove = (id: number) => {
-    setWatchlist((prev) => prev.filter((m) => m.id !== id));
-  };
+    const newMovie = {
+      id: Date.now(),
+      title: movieTitle,
+      genre: movieGenre,
+      status: 'Saved',
+      image: insideOut,
+    }
 
-  const handleStatusChange = (id: number, status: WatchStatus) => {
-    setWatchlist((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, status } : m))
-    );
-  };
+    setMovies([...movies, newMovie])
+    setMovieTitle('')
+    setMovieGenre('')
+  }
 
-  const handleNoteChange = (id: number, value: string) => {
-    setNoteInputs((prev) => ({ ...prev, [id]: value }));
-  };
-
-  const filtered =
-    filterStatus === "all"
-      ? watchlist
-      : watchlist.filter((m) => m.status === filterStatus);
-
-  const counts = {
-    all: watchlist.length,
-    watched: watchlist.filter((m) => m.status === "watched").length,
-    watching: watchlist.filter((m) => m.status === "watching").length,
-    "plan-to-watch": watchlist.filter((m) => m.status === "plan-to-watch").length,
-  };
+  function handleRemoveMovie(id: number) {
+    setMovies(movies.filter((movie) => movie.id !== id))
+  }
 
   return (
-    <section className="my-movies">
-      <div className="my-movies__header">
-        <h1 className="my-movies__title">My Movies</h1>
-        <p className="my-movies__subtitle">
-          Your personal watchlist — {watchlist.length} film{watchlist.length !== 1 ? "s" : ""} tracked
-        </p>
-      </div>
+    <section className="my-movies" aria-labelledby="my-movies-heading">
+      <h2 id="my-movies-heading">My Movies</h2>
 
-      {/* Stats */}
-      <ul className="my-movies__stats" role="list" aria-label="Watchlist statistics">
-        {(["all", "plan-to-watch", "watching", "watched"] as const).map((s) => (
-          <li key={s}>
-            <button
-              className={`my-movies__stat-btn${filterStatus === s ? " my-movies__stat-btn--active" : ""}`}
-              onClick={() => setFilterStatus(s)}
-              aria-pressed={filterStatus === s}
-            >
-              <span className="my-movies__stat-num">{counts[s]}</span>
-              <span className="my-movies__stat-label">
-                {s === "all" ? "All" : STATUS_LABELS[s]}
-              </span>
-            </button>
-          </li>
+      <p>
+        These are movies saved in the user's personal movie collection.
+      </p>
+
+      <form className="movie-form" onSubmit={handleAddMovie}>
+        <label htmlFor="movie-title">Movie Title</label>
+
+        <input
+          id="movie-title"
+          type="text"
+          value={movieTitle}
+          onChange={(event) => setMovieTitle(event.target.value)}
+          placeholder="Enter movie title"
+        />
+
+        <label htmlFor="movie-genre">Genre</label>
+
+        <input
+          id="movie-genre"
+          type="text"
+          value={movieGenre}
+          onChange={(event) => setMovieGenre(event.target.value)}
+          placeholder="Enter movie genre"
+        />
+
+        <button type="submit">Add Movie</button>
+      </form>
+
+      <div className="movie-card-list">
+        {movies.map((movie) => (
+          <article className="movie-card" key={movie.id}>
+            <img
+              src={movie.image}
+              alt={movie.title}
+              className="movie-image"
+            />
+
+            <div className="movie-info">
+              <h3>{movie.title}</h3>
+
+              <p>Genre: {movie.genre}</p>
+
+              <p>Status: {movie.status}</p>
+
+              <button
+                type="button"
+                className="remove-button"
+                onClick={() => handleRemoveMovie(movie.id)}
+              >
+                Remove
+              </button>
+            </div>
+          </article>
         ))}
-      </ul>
-
-      {/* List — I.3 Element Addition/Removal */}
-      {watchlist.length === 0 ? (
-        <div className="my-movies__empty">
-          <p className="my-movies__empty-icon">🎬</p>
-          <p className="my-movies__empty-text">Your watchlist is empty.</p>
-          <p className="my-movies__empty-hint">Browse the catalogue and add some films!</p>
-        </div>
-      ) : filtered.length === 0 ? (
-        <p className="my-movies__no-results">No movies with this status yet.</p>
-      ) : (
-        <ul className="my-movies__list" role="list">
-          {filtered.map((movie) => (
-            <li key={movie.id} className="my-movies__item">
-              <div className="my-movies__item-left">
-                <span className="my-movies__item-poster" aria-hidden="true">{movie.poster}</span>
-                <div className="my-movies__item-info">
-                  <h2 className="my-movies__item-title">{movie.title}</h2>
-                  <p className="my-movies__item-meta">
-                    {movie.genre} &bull; {movie.year} &bull; ★ {movie.rating}
-                  </p>
-                </div>
-              </div>
-
-              <div className="my-movies__item-right">
-                {/* I.2 Form Component — status selector */}
-                <div className="my-movies__status-group">
-                  <label
-                    htmlFor={`status-${movie.id}`}
-                    className="my-movies__status-label"
-                  >
-                    Status
-                  </label>
-                  <select
-                    id={`status-${movie.id}`}
-                    className={`my-movies__status-select my-movies__status-select--${movie.status}`}
-                    value={movie.status}
-                    onChange={(e) =>
-                      handleStatusChange(movie.id, e.target.value as WatchStatus)
-                    }
-                    aria-label={`Update status for ${movie.title}`}
-                  >
-                    {STATUS_OPTIONS.map((s) => (
-                      <option key={s} value={s}>
-                        {STATUS_LABELS[s]}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Note input — I.2 Form Component */}
-                <div className="my-movies__note-group">
-                  <label
-                    htmlFor={`note-${movie.id}`}
-                    className="my-movies__status-label"
-                  >
-                    Note
-                  </label>
-                  <input
-                    id={`note-${movie.id}`}
-                    type="text"
-                    className="my-movies__note-input"
-                    placeholder="Add a note…"
-                    value={noteInputs[movie.id] || ""}
-                    onChange={(e) => handleNoteChange(movie.id, e.target.value)}
-                    aria-label={`Add note for ${movie.title}`}
-                    maxLength={120}
-                  />
-                </div>
-
-                <button
-                  className="my-movies__remove-btn"
-                  onClick={() => handleRemove(movie.id)}
-                  aria-label={`Remove ${movie.title} from watchlist`}
-                >
-                  Remove
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+      </div>
     </section>
-  );
+  )
 }
+
+export default MyMovies

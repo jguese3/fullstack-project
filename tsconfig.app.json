@@ -8,7 +8,7 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "bundler",https://github.com/jguese3/fullstack-project/pull/29/conflict?name=tsconfig.app.json&ancestor_oid=7f42e5f7cd2e79c7b5a25b753e56b1bcf94e1381&base_oid=634bc6b51c98ee49c37fb7edbe80f3668492e989&head_oid=dda89ed71b4357b948e9927986ea13a2e7285b22
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
@@ -18,11 +18,11 @@
     /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-<<<<<<< HEAD
-    "erasableSyntaxOnly": false,
-=======
     "erasableSyntaxOnly": true,
->>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
+=======
+    "erasableSyntaxOnly": false,
+"erasableSyntaxOnly": true,
+"noFallthroughCasesInSwitch": true
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"]
