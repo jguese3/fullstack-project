@@ -34,6 +34,7 @@ body {
   padding: 0;
 }
 
+.nav-links a {
 .nav-links button {
   background: none;
   border: none;
@@ -77,3 +78,4 @@ body {
   border-top: 1px solid #dcdcdc;
   color: #333333;
 }
+

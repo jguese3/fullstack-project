@@ -1,5 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap");
 
+<<<<<<< HEAD
+.homepage {
+  font-family: "DM Sans", sans-serif;
+  color: var(--cl-text);
+  padding-bottom: 4rem;
+}
+
+/* Hero */
+.homepage__hero {
+=======
 /* ── Variables ─────────────────────────────────────────────── */
 .homepage {
   --cl-dark: #0d0f14;
@@ -21,12 +31,19 @@
 /* ── Hero ──────────────────────────────────────────────────── */
 .homepage__hero {
   position: relative;
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 2rem;
   padding: 5rem 3rem 4rem;
   border-bottom: 1px solid var(--cl-border);
+<<<<<<< HEAD
+  background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(232, 176, 75, 0.08) 0%, transparent 70%);
+  flex-wrap: wrap;
+}
+
+=======
   background:
     radial-gradient(ellipse 60% 50% at 70% 40%, rgba(232, 176, 75, 0.08) 0%, transparent 70%),
     var(--cl-dark);
@@ -37,6 +54,7 @@
   max-width: 640px;
 }
 
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 .homepage__hero-eyebrow {
   font-family: "DM Mono", monospace;
   font-size: 0.75rem;
@@ -52,7 +70,10 @@
   font-weight: 700;
   line-height: 1.1;
   margin: 0 0 1.25rem;
+<<<<<<< HEAD
+=======
   color: var(--cl-text);
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 }
 
 .homepage__hero-accent {
@@ -82,7 +103,14 @@
   border-radius: 4px;
   border: none;
   cursor: pointer;
+<<<<<<< HEAD
+  transition: opacity 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+=======
   transition: opacity 0.2s ease, transform 0.15s ease;
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 }
 
 .homepage__btn:hover {
@@ -101,6 +129,18 @@
   border: 1px solid var(--cl-border);
 }
 
+<<<<<<< HEAD
+.homepage__hero-count {
+  background-color: var(--cl-gold);
+  color: #0d0f14;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem;
+  border-radius: 1rem;
+}
+
+=======
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 .homepage__hero-badge {
   display: flex;
   flex-direction: column;
@@ -131,9 +171,80 @@
   margin-top: 0.3rem;
 }
 
+<<<<<<< HEAD
+/* Search */
+.homepage__search-section {
+  padding: 2.5rem 3rem 0;
+}
+
+.homepage__search-form {
+  max-width: 560px;
+}
+
+.homepage__search-label {
+  display: block;
+  font-family: "DM Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cl-muted);
+  margin-bottom: 0.6rem;
+}
+
+.homepage__search-row {
+  position: relative;
+}
+
+.homepage__search-input {
+  width: 100%;
+  background-color: var(--cl-surface);
+  border: 1px solid var(--cl-border);
+  border-radius: 4px;
+  color: var(--cl-text);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.95rem;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.homepage__search-input:focus {
+  border-color: var(--cl-gold);
+}
+
+.homepage__search-input::placeholder {
+  color: var(--cl-muted);
+}
+
+.homepage__search-clear {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--cl-muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.2rem;
+}
+
+.homepage__search-results-count {
+  font-family: "DM Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--cl-gold);
+  margin: 0.5rem 0 0;
+}
+
+/* Genre */
+.homepage__genre-section {
+  padding: 2.5rem 3rem 1.5rem;
+=======
 /* ── Genre Section ─────────────────────────────────────────── */
 .homepage__genre-section {
   padding: 3rem 3rem 1.5rem;
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 }
 
 .homepage__section-title {
@@ -153,10 +264,13 @@
   gap: 0.625rem;
 }
 
+<<<<<<< HEAD
+=======
 .homepage__genre-item {
   display: inline;
 }
 
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 .homepage__genre-btn {
   font-family: "DM Mono", monospace;
   font-size: 0.78rem;
@@ -170,15 +284,33 @@
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
+<<<<<<< HEAD
+.homepage__genre-btn:hover,
+.homepage__genre-btn--active {
+  background-color: rgba(232, 176, 75, 0.12);
+=======
 .homepage__genre-btn:hover {
   background-color: var(--cl-gold-dim);
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
   color: var(--cl-gold);
   border-color: var(--cl-gold);
 }
 
+<<<<<<< HEAD
+/* Movies Grid */
+.homepage__featured {
+  padding: 0 3rem;
+}
+
+.homepage__empty {
+  color: var(--cl-muted);
+  font-size: 0.95rem;
+  padding: 2rem 0;
+=======
 /* ── Featured Movies Grid ──────────────────────────────────── */
 .homepage__featured {
   padding: 2rem 3rem 0;
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 }
 
 .homepage__movies-grid {
@@ -197,8 +329,13 @@
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
+  gap: 0.4rem;
+  transition: border-color 0.2s, transform 0.2s;
+=======
   gap: 0.5rem;
   transition: border-color 0.2s ease, transform 0.2s ease;
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 }
 
 .homepage__movie-card:hover {
@@ -218,7 +355,11 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--cl-gold);
+<<<<<<< HEAD
+  background-color: rgba(232, 176, 75, 0.12);
+=======
   background-color: var(--cl-gold-dim);
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
   padding: 0.2rem 0.6rem;
   border-radius: 2rem;
 }
@@ -229,12 +370,24 @@
   color: var(--cl-gold);
 }
 
+<<<<<<< HEAD
+.homepage__movie-poster {
+  font-size: 2.5rem;
+  margin: 0.5rem 0 0.25rem;
+}
+
+=======
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 .homepage__movie-title {
   font-family: "Playfair Display", serif;
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--cl-text);
+<<<<<<< HEAD
+  margin: 0;
+=======
   margin: 0.25rem 0 0;
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
   line-height: 1.3;
 }
 
@@ -264,14 +417,33 @@
   border-radius: 4px;
   cursor: pointer;
   margin-top: auto;
+<<<<<<< HEAD
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.homepage__movie-btn:hover:not(:disabled) {
+=======
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .homepage__movie-btn:hover {
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
   background-color: var(--cl-gold);
   color: var(--cl-dark);
 }
 
+<<<<<<< HEAD
+.homepage__movie-btn--added,
+.homepage__movie-btn:disabled {
+  color: var(--cl-muted);
+  border-color: var(--cl-border);
+  cursor: default;
+}
+
+@media (max-width: 640px) {
+  .homepage__hero,
+  .homepage__search-section,
+=======
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .homepage__hero {
@@ -280,6 +452,7 @@
     align-items: flex-start;
   }
 
+>>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
   .homepage__genre-section,
   .homepage__featured {
     padding-left: 1.5rem;
