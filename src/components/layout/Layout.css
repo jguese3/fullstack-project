@@ -1,0 +1,28 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--cl-dark);
+}
+
+.layout__header {
+  flex-shrink: 0;
+}
+
+.layout__main {
+  flex: 1;
+}
+
+.layout__footer {
+  border-top: 1px solid var(--cl-border);
+  padding: 1.5rem 3rem;
+  text-align: center;
+}
+
+.layout__footer-text {
+  font-family: "DM Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--cl-muted);
+  margin: 0;
+  letter-spacing: 0.04em;
+}

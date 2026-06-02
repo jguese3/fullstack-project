@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap");
+
+/* ── Global CSS Variables ─────────────────────────────────── */
+:root {
+  --cl-dark:    #0d0f14;
+  --cl-surface: #161a24;
+  --cl-border:  #252b3b;
+  --cl-gold:    #e8b04b;
+  --cl-text:    #e8eaf0;
+  --cl-muted:   #7a8099;
+  --cl-red:     #e85454;
+  --cl-green:   #4caf7d;
+}
+
+/* ── Reset ────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--cl-dark);
+  color: var(--cl-text);
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cl-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cl-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cl-muted);
+}
+
+/* ── Focus styles ─────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--cl-gold);
+  outline-offset: 2px;
+}
