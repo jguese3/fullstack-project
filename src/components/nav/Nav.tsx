@@ -9,8 +9,8 @@ export default function Nav({ watchlistCount }: NavProps) {
   return (
     <nav className="nav" aria-label="Main navigation">
       <div className="nav__brand">
-        <span className="nav__logo">🎬</span>
-        <span className="nav__title">CineLog</span>
+        <span className="nav__logo"> </span>
+        <span className="nav__title">MovieFlix</span>
       </div>
       <ul className="nav__links">
         <li>

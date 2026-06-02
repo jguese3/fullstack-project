@@ -2,8 +2,15 @@ import { useState } from 'react'
 import './App.css'
 import MyMovies from './components/my-movies/MyMovies'
 
+// Jarone Components Imports
+import { AllMovies } from './components/pages/all-movies/AllMovies'
+import type { Movie } from './types/movies'
+import { sampleMovies } from './movies/movieData'
+
 function App() {
   const [page, setPage] = useState('home')
+
+  const [movies, setMovies] = useState<Movie[]>(sampleMovies)
 
   return (
     <div className="app">
@@ -54,13 +61,10 @@ function App() {
         )}
 
         {page === 'all' && (
-          <>
-            <h2>All Movies</h2>
-
-            <p>
-              Browse all available movies in the platform.
-            </p>
-          </>
+          <AllMovies 
+            movies={movies}
+            updateMovies={setMovies}
+          />
         )}
 
         {page === 'my' && <MyMovies />}
