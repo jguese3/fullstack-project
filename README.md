@@ -5,11 +5,11 @@
 
 **Team Name:** MovieFlix Crew
 =======
-# 🎬 CineLog — Movie Catalogue App
+# 🎬 MovieFlix — Movie Catalogue App
 
 ## Team
 
-**Team Name:** CineLog Crew
+**Team Name:** MovieFlix Crew
 >>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 
 | Member | Role |
@@ -45,7 +45,7 @@ MovieFlix is a movie catalogue application that allows users to discover, track,
 <<<<<<< HEAD
 MovieFlix is built with React + TypeScript using Vite as the build tool. It features a public movie catalogue browsable by all visitors, and a personal movie management experience for logged-in users.
 =======
-CineLog is built with React + TypeScript using Vite as the build tool. It features a public movie catalogue browsable by all visitors, and a personal movie management experience for logged-in users.
+MovieFlix is built with React + TypeScript using Vite as the build tool. It features a public movie catalogue browsable by all visitors, and a personal movie management experience for logged-in users.
 >>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 
 ### Pages
