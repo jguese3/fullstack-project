@@ -25,7 +25,7 @@
 <<<<<<< HEAD
 MovieFlix is a movie catalogue application that allows users to discover, track, and manage their personal movie collections.
 =======
-CineLog is a movie catalogue application that allows users to discover, track, and manage their personal movie collections.
+MovieFlix is a movie catalogue application that allows users to discover, track, and manage their personal movie collections.
 >>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
 
 ### User Stories
