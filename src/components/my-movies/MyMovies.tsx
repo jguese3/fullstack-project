@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import './MyMovies.css'
 
-import gameOfThrones from '../../assets/gameofthrones.jpg'
-import spiderMan from '../../assets/spiderman.jpg'
-import insideOut from '../../assets/insideout.jpg'
+import { movieData } from '../../data/movieData'
 import {
   createMovie,
   removeMovieById,
@@ -13,36 +11,18 @@ function MyMovies() {
   const [movieTitle, setMovieTitle] = useState('')
   const [movieGenre, setMovieGenre] = useState('')
 
-  const [movies, setMovies] = useState([
-    {
-      id: 1,
-      title: 'Game of Thrones',
-      genre: 'Thriller',
-      status: 'Watched',
-      image: gameOfThrones,
-    },
-    {
-      id: 2,
-      title: 'Spider-Man: No Way Home',
-      genre: 'Superhero',
-      status: 'Watching',
-      image: spiderMan,
-    },
-    {
-      id: 3,
-      title: 'Inside Out',
-      genre: 'Animation',
-      status: 'Saved',
-      image: insideOut,
-    },
-  ])
+  const [movies, setMovies] = useState(movieData)
 
   function handleAddMovie(event: any) {
     event.preventDefault()
 
-    const newMovie = createMovie(movieTitle, movieGenre, insideOut)
-    setMovies([...movies, newMovie])
+    const newMovie = createMovie(
+      movieTitle,
+      movieGenre,
+      movieData[0].image
+    )
 
+    setMovies([...movies, newMovie])
     setMovieTitle('')
     setMovieGenre('')
   }

@@ -1,10 +1,4 @@
-type Movie = {
-  id: number
-  title: string
-  genre: string
-  status: string
-  image: string
-}
+import type { Movie } from '../types/Movie'
 
 export function createMovie(title: string, genre: string, image: string): Movie {
   return {
