@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './MyMovies.css'
+import { getAllMovies } from '../../repositories/movieRepository'
 
 import { movieData } from '../../data/movieData'
 import {
@@ -11,7 +12,7 @@ function MyMovies() {
   const [movieTitle, setMovieTitle] = useState('')
   const [movieGenre, setMovieGenre] = useState('')
 
-  const [movies, setMovies] = useState(movieData)
+  const [movies, setMovies] = useState(getAllMovies())
 
   function handleAddMovie(event: any) {
     event.preventDefault()
