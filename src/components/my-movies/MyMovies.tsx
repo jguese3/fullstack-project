@@ -4,6 +4,10 @@ import './MyMovies.css'
 import gameOfThrones from '../../assets/gameofthrones.jpg'
 import spiderMan from '../../assets/spiderman.jpg'
 import insideOut from '../../assets/insideout.jpg'
+import {
+  createMovie,
+  removeMovieById,
+} from '../../services/movieService'
 
 function MyMovies() {
   const [movieTitle, setMovieTitle] = useState('')
@@ -36,21 +40,16 @@ function MyMovies() {
   function handleAddMovie(event: any) {
     event.preventDefault()
 
-    const newMovie = {
-      id: Date.now(),
-      title: movieTitle,
-      genre: movieGenre,
-      status: 'Saved',
-      image: insideOut,
-    }
-
+    const newMovie = createMovie(movieTitle, movieGenre, insideOut)
     setMovies([...movies, newMovie])
+
     setMovieTitle('')
     setMovieGenre('')
   }
 
   function handleRemoveMovie(id: number) {
-    setMovies(movies.filter((movie) => movie.id !== id))
+    const updatedMovies = removeMovieById(movies, id)
+    setMovies(updatedMovies)
   }
 
   return (
