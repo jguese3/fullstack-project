@@ -2,12 +2,16 @@ import { useState } from 'react'
 import './MyMovies.css'
 import { getAllMovies } from '../../repositories/movieRepository'
 
-import { movieData } from '../../data/movieData'
 import {
   createMovie,
   removeMovieById,
 } from '../../services/movieService'
 
+/**
+ * This component displays movies using data from the movie repository.
+ * It uses movieService for movie creation and removal.
+ * The repository provides movie data for the component.
+ */
 function MyMovies() {
   const [movieTitle, setMovieTitle] = useState('')
   const [movieGenre, setMovieGenre] = useState('')
@@ -20,7 +24,7 @@ function MyMovies() {
     const newMovie = createMovie(
       movieTitle,
       movieGenre,
-      movieData[0].image
+      getAllMovies()[0].image
     )
 
     setMovies([...movies, newMovie])
