@@ -15,3 +15,13 @@ export function getMovieById(id: number): Movie {
     return foundMovie;
 }
 
+// Add movie to watchlist
+export async function addToWatchlist(movieId: number) {
+    const foundMovie = sampleMovies.find(movie => movie.id === movieId);
+    if (!foundMovie) {
+        throw new Error(`Movie with id ${movieId} not found`);
+    } else {
+        foundMovie.watchlist = true;
+    }
+    return foundMovie;
+}
