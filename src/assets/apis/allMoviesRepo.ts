@@ -25,3 +25,14 @@ export async function addToWatchlist(movieId: number) {
     }
     return foundMovie;
 }
+
+// Remove movie from watchlist
+export async function removeFromWatchlist(movieId: number) {
+    const foundMovie = sampleMovies.find(movie => movie.id === movieId);
+    if (!foundMovie) {
+        throw new Error(`Movie with id ${movieId} not found`);
+    } else {
+        foundMovie.watchlist = false;
+    }
+    return foundMovie;
+}
