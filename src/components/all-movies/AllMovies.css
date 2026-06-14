@@ -1,0 +1,213 @@
+.all-movies {
+  padding: 3rem;
+  font-family: "DM Sans", sans-serif;
+  color: var(--cl-text);
+}
+
+.all-movies__header {
+  margin-bottom: 2rem;
+}
+
+.all-movies__title {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+
+.all-movies__subtitle {
+  color: var(--cl-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.all-movies__filters {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--cl-surface);
+  border: 1px solid var(--cl-border);
+  border-radius: 6px;
+}
+
+.all-movies__filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 160px;
+}
+
+.all-movies__label {
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cl-muted);
+}
+
+.all-movies__input,
+.all-movies__select {
+  background-color: var(--cl-dark);
+  border: 1px solid var(--cl-border);
+  border-radius: 4px;
+  color: var(--cl-text);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.all-movies__input:focus,
+.all-movies__select:focus {
+  border-color: var(--cl-gold);
+}
+
+.all-movies__select option {
+  background-color: var(--cl-surface);
+}
+
+.all-movies__count {
+  font-family: "DM Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--cl-gold);
+  margin: 0;
+  align-self: flex-end;
+  white-space: nowrap;
+}
+
+.all-movies__empty {
+  color: var(--cl-muted);
+  padding: 2rem 0;
+  font-size: 0.95rem;
+}
+
+.all-movies__grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1.25rem;
+}
+
+.all-movies__card {
+  background-color: var(--cl-surface);
+  border: 1px solid var(--cl-border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.all-movies__card:hover {
+  border-color: var(--cl-gold);
+  transform: translateY(-2px);
+}
+
+.all-movies__card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.all-movies__poster {
+  font-size: 2rem;
+}
+
+.all-movies__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+}
+
+.all-movies__genre-tag {
+  font-family: "DM Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cl-gold);
+  background-color: rgba(232, 176, 75, 0.12);
+  padding: 0.15rem 0.55rem;
+  border-radius: 2rem;
+}
+
+.all-movies__rating {
+  font-family: "DM Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--cl-gold);
+}
+
+.all-movies__card-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--cl-text);
+}
+
+.all-movies__card-year {
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--cl-muted);
+  margin: 0;
+}
+
+.all-movies__card-desc {
+  font-size: 0.85rem;
+  color: var(--cl-muted);
+  line-height: 1.6;
+  margin: 0.25rem 0 0.5rem;
+  flex: 1;
+}
+
+.all-movies__card-actions {
+  margin-top: auto;
+}
+
+.all-movies__btn {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.all-movies__btn--add {
+  background-color: transparent;
+  color: var(--cl-gold);
+  border: 1px solid var(--cl-gold);
+}
+
+.all-movies__btn--add:hover {
+  background-color: var(--cl-gold);
+  color: var(--cl-dark);
+}
+
+.all-movies__btn--remove {
+  background-color: transparent;
+  color: var(--cl-red, #e85454);
+  border: 1px solid var(--cl-red, #e85454);
+}
+
+.all-movies__btn--remove:hover {
+  background-color: var(--cl-red, #e85454);
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .all-movies {
+    padding: 2rem 1.5rem;
+  }
+}

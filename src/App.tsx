@@ -2,6 +2,11 @@ import './App.css'
 import { Routes, Route, NavLink } from 'react-router-dom'
 import MyMovies from './components/my-movies/MyMovies'
 
+// Jarone Components Imports
+import { AllMovies } from './components/pages/all-movies/AllMovies'
+import type { Movie } from './types/movies'
+import { sampleMovies } from './movies/movieData'
+
 function App() {
   return (
     <div className="app">
@@ -59,3 +64,4 @@ function App() {
 }
 
 export default App
+
