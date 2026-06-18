@@ -1,3 +1,8 @@
+/**
+ * Jarones All Movies Repository
+ * This module provides functions to interact with the movie data, including fetching all movies, getting a movie by ID, and managing the watchlist status of movies.
+ * The data is currently mocked using a sample dataset, but these functions can be easily adapted to fetch data from an API or database in the future.
+ */
 import type { Movie } from '../../types/movies';
 import { sampleMovies } from './mockMovieData';
 
