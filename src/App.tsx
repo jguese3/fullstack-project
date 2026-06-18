@@ -4,8 +4,8 @@ import MyMovies from './components/my-movies/MyMovies'
 
 // Jarone Components Imports
 import { AllMovies } from './components/pages/all-movies/AllMovies'
-import type { Movie } from './types/movies'
-import { sampleMovies } from './movies/movieData'
+// import type { Movie } from './types/movies'
+// import { sampleMovies } from './movies/movieData'
 
 function App() {
   return (
@@ -42,15 +42,7 @@ function App() {
             }
           />
 
-          <Route
-            path="/all-movies"
-            element={
-              <>
-                <h2>All Movies</h2>
-                <p>Browse all available movies in the platform.</p>
-              </>
-            }
-          />
+          <Route path="/all-movies" element={<AllMovies />} />
 
           <Route path="/my-movies" element={<MyMovies />} />
         </Routes>

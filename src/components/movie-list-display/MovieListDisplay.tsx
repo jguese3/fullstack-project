@@ -6,27 +6,12 @@ import './MovieListDisplay.css';
 
 export function MovieListDisplay({
     movies,
-    updateMovies,
+    onWatchlistClick,
 }: {
     movies: Movie[];
-    updateMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
+    onWatchlistClick: (movieId: number) => Promise<void> | void;
 }) {
     const [expandedMovieId, setExpandedMovieId] = useState<number | null>(null);
-
-    const handleMovieFavoriteToggle = (movieClicked: Movie): void => {
-        updateMovies(oldMovieState => {
-            return oldMovieState.map(movie => {
-                if (movie.id === movieClicked.id) {
-                    return {
-                        ...movie,
-                        watchlist: !movie.watchlist,
-                    }
-                } else {
-                    return movie;
-                }
-            });
-        });
-    };
 
     const movieListItems: JSX.Element[] = movies.map((movie) => {
         return (
@@ -37,7 +22,7 @@ export function MovieListDisplay({
                 onTitleClick={() => {
                     setExpandedMovieId(movie.id === expandedMovieId ? null : movie.id);
                 }}
-                onWatchlistClick={() => handleMovieFavoriteToggle(movie)}
+                onWatchlistClick={() => onWatchlistClick(movie.id)}
             />
         );
     });
