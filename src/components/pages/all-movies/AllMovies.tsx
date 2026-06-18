@@ -1,10 +1,19 @@
-import { useMovies } from '../../../hooks/useMovies';
+/**
+ * Jarones All Movies Page Component
+ */
+import type { Movie } from '../../../types/movies';
 import { MovieListDisplay } from '../../movie-list-display/MovieListDisplay';
 import './AllMovies.css';
 
-export function AllMovies() {
-  const { movies, toggleWatchlist, error } = useMovies([], null);
-
+export function AllMovies({
+  movies,
+  toggleWatchlist,
+  error,
+}: {
+  movies: Movie[];
+  toggleWatchlist: (movieId: number) => Promise<void> | void;
+  error: string | null;
+}) {
   return (
     <>
       <header>
@@ -16,4 +25,5 @@ export function AllMovies() {
       </main>
     </>
   );
-} 
+}
+ 
