@@ -4,10 +4,11 @@ import MyMovies from './components/my-movies/MyMovies'
 
 // Jarone Components Imports
 import { AllMovies } from './components/pages/all-movies/AllMovies'
-import type { Movie } from './types/movies'
-import { sampleMovies } from './movies/movieData'
+import { useMovies } from './hooks/useMovies'
 
 function App() {
+  const { movies, toggleWatchlist } = useMovies([], null)
+  
   return (
     <div className="app">
       <header className="navbar">
@@ -45,10 +46,10 @@ function App() {
           <Route
             path="/all-movies"
             element={
-              <>
-                <h2>All Movies</h2>
-                <p>Browse all available movies in the platform.</p>
-              </>
+              <AllMovies
+                movies={movies}
+                toggleWatchlist={toggleWatchlist}
+              />
             }
           />
 
