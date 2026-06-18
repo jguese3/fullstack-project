@@ -1,17 +1,14 @@
-import { useState } from 'react'
 import './App.css'
+import { Routes, Route, NavLink } from 'react-router-dom'
 import MyMovies from './components/my-movies/MyMovies'
 
 // Jarone Components Imports
 import { AllMovies } from './components/pages/all-movies/AllMovies'
-import type { Movie } from './types/movies'
-import { sampleMovies } from './movies/movieData'
+import { useMovies } from './hooks/useMovies'
 
 function App() {
-  const [page, setPage] = useState('home')
-
-  const [movies, setMovies] = useState<Movie[]>(sampleMovies)
-
+  const { movies, toggleWatchlist } = useMovies([], null)
+  
   return (
     <div className="app">
       <header className="navbar">
@@ -20,60 +17,48 @@ function App() {
         <nav>
           <ul className="nav-links">
             <li>
-              <button
-                className={page === 'home' ? 'active-link' : ''}
-                onClick={() => setPage('home')}
-              >
-                Home
-              </button>
+              <NavLink to="/">Home</NavLink>
             </li>
 
             <li>
-              <button
-                className={page === 'all' ? 'active-link' : ''}
-                onClick={() => setPage('all')}
-              >
-                All Movies
-              </button>
+              <NavLink to="/all-movies">All Movies</NavLink>
             </li>
 
             <li>
-              <button
-                className={page === 'my' ? 'active-link' : ''}
-                onClick={() => setPage('my')}
-              >
-                My Movies
-              </button>
+              <NavLink to="/my-movies">My Movies</NavLink>
             </li>
           </ul>
         </nav>
       </header>
 
       <main className="main-content">
-        {page === 'home' && (
-          <>
-            <h2>Welcome to MovieFlix</h2>
-
-            <p>
-              Discover and manage your favorite movies in one place.
-            </p>
-          </>
-        )}
-
-        {page === 'all' && (
-          <AllMovies 
-            movies={movies}
-            updateMovies={setMovies}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <h2>Welcome to MovieFlix</h2>
+                <p>Discover and manage your favorite movies in one place.</p>
+              </>
+            }
           />
-        )}
 
-        {page === 'my' && <MyMovies />}
+          <Route
+            path="/all-movies"
+            element={
+              <AllMovies
+                movies={movies}
+                toggleWatchlist={toggleWatchlist}
+              />
+            }
+          />
+
+          <Route path="/my-movies" element={<MyMovies />} />
+        </Routes>
       </main>
 
       <footer className="footer">
-        <p>
-          Group Members: Navpreet Singh, Rajandeep Kaur, Jarone Guese
-        </p>
+        <p>Group Members: Navpreet Singh, Rajandeep Kaur, Jarone Guese</p>
       </footer>
     </div>
   )
