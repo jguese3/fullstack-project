@@ -1,48 +1,33 @@
 import { useState } from 'react'
 import './MyMovies.css'
+import { getAllMovies } from '../../repositories/movieRepository'
 
-import gameOfThrones from '../../assets/gameofthrones.jpg'
-import spiderMan from '../../assets/spiderman.jpg'
-import insideOut from '../../assets/insideout.jpg'
 import {
   createMovie,
   removeMovieById,
 } from '../../services/movieService'
 
+/**
+ * This component displays movies using data from the movie repository.
+ * It uses movieService for movie creation and removal.
+ * The repository provides movie data for the component.
+ */
 function MyMovies() {
   const [movieTitle, setMovieTitle] = useState('')
   const [movieGenre, setMovieGenre] = useState('')
 
-  const [movies, setMovies] = useState([
-    {
-      id: 1,
-      title: 'Game of Thrones',
-      genre: 'Thriller',
-      status: 'Watched',
-      image: gameOfThrones,
-    },
-    {
-      id: 2,
-      title: 'Spider-Man: No Way Home',
-      genre: 'Superhero',
-      status: 'Watching',
-      image: spiderMan,
-    },
-    {
-      id: 3,
-      title: 'Inside Out',
-      genre: 'Animation',
-      status: 'Saved',
-      image: insideOut,
-    },
-  ])
+  const [movies, setMovies] = useState(getAllMovies())
 
   function handleAddMovie(event: any) {
     event.preventDefault()
 
-    const newMovie = createMovie(movieTitle, movieGenre, insideOut)
-    setMovies([...movies, newMovie])
+    const newMovie = createMovie(
+      movieTitle,
+      movieGenre,
+      getAllMovies()[0].image
+    )
 
+    setMovies([...movies, newMovie])
     setMovieTitle('')
     setMovieGenre('')
   }
