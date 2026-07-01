@@ -4,18 +4,18 @@
 
 ```
 cinelog-sprint4/
-├── package.json          ← root npm workspaces config
-├── frontend/             ← React + Vite + TypeScript
-└── backend/              ← Express + TypeScript + Prisma + SQLite
+├── package.json          <- root npm workspaces config
+├── frontend/             <- React + Vite + TypeScript
+└── backend/              <- Express + TypeScript + Prisma + SQLite
     ├── prisma/
-    │   ├── schema.prisma ← database schema (Movie, WatchlistEntry, Review)
-    │   └── seed.ts       ← seeds the DB with 12 initial movies
+    │   ├── schema.prisma <- database schema (Movie, WatchlistEntry, Review)
+    │   └── seed.ts       <- seeds the DB with 12 initial movies
     └── src/
-        ├── middleware/   ← validate.ts (request validation)
-        ├── repositories/ ← Prisma CRUD
-        ├── services/     ← business logic
-        ├── controllers/  ← parse req/res
-        └── routes/       ← URL → controller mapping
+        ├── middleware/   <- validate.ts (request validation)
+        ├── repositories/ <- Prisma CRUD
+        ├── services/     <- business logic
+        ├── controllers/  <- parse req/res
+        └── routes/       <- URL → controller mapping
 ```
 
 ## First-time setup (do this once)
