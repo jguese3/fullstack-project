@@ -1,91 +1,98 @@
-<<<<<<< HEAD
-# 🎬 MovieFlix — Movie Catalogue App
+# CineLog — Sprint 4 (Full-Stack Monorepo)
 
-## Team
+## Structure
 
-**Team Name:** MovieFlix Crew
-=======
-# 🎬 MovieFlix — Movie Catalogue App
-
-## Team
-
-**Team Name:** MovieFlix Crew
->>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
-
-| Member | Role |
-|---|---|
-| Navpreet Singh | My Movies Page |
-| Jarone Guese | All Movies Page |
-| Rajandeep Kaur | Homepage |
-
----
-
-## Project Description
-
-<<<<<<< HEAD
-MovieFlix is a movie catalogue application that allows users to discover, track, and manage their personal movie collections.
-=======
-MovieFlix is a movie catalogue application that allows users to discover, track, and manage their personal movie collections.
->>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
-
-### User Stories
-
-1. **As a user, I want to browse a catalogue of movies on the homepage, so that I can discover films to watch or add to my collection.**
-
-2. **As a user, I want to log in and maintain a personal "My Movies" list, so that I can keep track of movies I have watched, am watching, or plan to watch.**
-
-3. **As a user, I want to view detailed information about any movie in the catalogue, so that I can learn about its genre, rating, cast, and synopsis before deciding to watch it.**
-
-4. **As a user, I want to search and filter movies by genre, rating, or release year, so that I can quickly find films that match my preferences.**
-
----
-
-## Project Overview
-
-<<<<<<< HEAD
-MovieFlix is built with React + TypeScript using Vite as the build tool. It features a public movie catalogue browsable by all visitors, and a personal movie management experience for logged-in users.
-=======
-MovieFlix is built with React + TypeScript using Vite as the build tool. It features a public movie catalogue browsable by all visitors, and a personal movie management experience for logged-in users.
->>>>>>> 269522736b9278c528c710d6b88bcff704bbda16
-
-### Pages
-
-- **Homepage** — Landing page showcasing featured and trending movies
-- **All Movies** — Full browsable catalogue with search and filter functionality
-- **My Movies** — Personalized dashboard for logged-in users to manage their watchlist
-
----
-
-## Tech Stack
-
-- **Framework:** React 18 + TypeScript
-- **Build Tool:** Vite
-- **Deployment:** Vercel
-- **Styling:** CSS Modules
-
----
-
-## Style Guide
-
-See [STYLEGUIDE.md](./STYLEGUIDE.md) for colour palette and typography details.
-
----
-
-## Getting Started
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
+```
+cinelog-sprint4/
+├── package.json          ← root npm workspaces config
+├── frontend/             ← React + Vite + TypeScript
+└── backend/              ← Express + TypeScript + Prisma + SQLite
+    ├── prisma/
+    │   ├── schema.prisma ← database schema (Movie, WatchlistEntry, Review)
+    │   └── seed.ts       ← seeds the DB with 12 initial movies
+    └── src/
+        ├── middleware/   ← validate.ts (request validation)
+        ├── repositories/ ← Prisma CRUD
+        ├── services/     ← business logic
+        ├── controllers/  ← parse req/res
+        └── routes/       ← URL → controller mapping
 ```
 
----
+## First-time setup (do this once)
 
-## Deployment
+### 1. Install all dependencies from the monorepo root
 
-The application is deployed on Vercel and automatically updates on every push to the `main` branch.
+```bash
+cd cinelog-sprint4
+npm install
+```
+
+### 2. Set up the database
+
+```bash
+cd backend
+npx prisma migrate dev --name init
+```
+
+This creates `prisma/dev.db` (SQLite file) and automatically seeds it with 12 movies.
+
+### 3. Generate the Prisma client (if not done automatically)
+
+```bash
+npx prisma generate
+```
+
+## Running locally
+
+You need **two terminals** — one per app.
+
+### Terminal 1 — backend
+
+```bash
+cd backend
+npm run dev
+```
+
+Server starts at `http://localhost:3001`.
+Verify: `http://localhost:3001/api/movies` should return 12 movies as JSON.
+
+### Terminal 2 — frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+App starts at `http://localhost:5173`.
+
+## Running in GitHub Codespaces
+
+Everything works the same way — the frontend automatically detects the
+Codespaces `*.app.github.dev` hostname and rewrites API calls to the
+forwarded port-3001 URL. Just make sure both `npm run dev` processes are
+running simultaneously in two separate terminal tabs.
+
+## API Endpoints
+
+| Method | Route | Description |
+|---|---|---|
+| GET | `/api/health` | Health check |
+| GET | `/api/movies` | All movies |
+| GET | `/api/watchlist` | All watchlist entries (includes movie data) |
+| POST | `/api/watchlist/:movieId/toggle` | Add or remove a movie from watchlist |
+| POST | `/api/watchlist/:movieId/toggle-watched` | Toggle watched status |
+| GET | `/api/reviews` | All reviews |
+| POST | `/api/reviews` | Create a review |
+| DELETE | `/api/reviews/:id` | Delete a review |
+
+## Database schema (3NF)
+
+```
+Movie            — id, title, year, genre, director, rating, description, poster
+WatchlistEntry   — id, movieId (FK → Movie), addedAt, watched
+Review           — id, movieId (FK → Movie), text, rating, createdAt
+```
+
+Each table is in Third Normal Form: every non-key column depends only on
+the primary key of that table. Movie data is never duplicated in
+WatchlistEntry or Review — only the foreign key `movieId` is stored.

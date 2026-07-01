@@ -1,0 +1,62 @@
+// Prisma schema for CineLog
+//
+// Database: SQLite (file-based, zero-config development database — each
+// developer gets their own local dev.db file, satisfying T.2's "locally
+// installed" option without requiring a shared server).
+//
+// ── Third Normal Form notes (I.2) ──────────────────────────────────────────
+// Movie       — every non-key column (title, year, genre, director, rating,
+//                description, poster) depends only on the Movie's own id.
+//                No repeating groups, no column depends on another non-key
+//                column (e.g. genre does not determine director).
+// WatchlistEntry — references a Movie by movieId (foreign key) rather than
+//                duplicating any Movie columns. addedAt/watched depend only
+//                on the WatchlistEntry's own id, not on movie attributes.
+// Review      — references a Movie by movieId (foreign key) rather than
+//                duplicating any Movie columns. text/rating/createdAt depend
+//                only on the Review's own id.
+// Storing a foreign key instead of repeating Movie data is what keeps all
+// three tables in 3NF — there is no transitive dependency on a non-key column.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Movie {
+  id          Int      @id @default(autoincrement())
+  title       String
+  year        Int
+  genre       String
+  director    String
+  rating      Float
+  description String
+  poster      String
+
+  watchlistEntries WatchlistEntry[]
+  reviews          Review[]
+}
+
+model WatchlistEntry {
+  id      Int      @id @default(autoincrement())
+  movieId Int
+  movie   Movie    @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  addedAt DateTime @default(now())
+  watched Boolean  @default(false)
+
+  // A movie can only appear once in the watchlist
+  @@unique([movieId])
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  movieId   Int
+  movie     Movie    @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  text      String
+  rating    Int
+  createdAt DateTime @default(now())
+}
