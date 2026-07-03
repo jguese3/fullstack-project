@@ -1,6 +1,15 @@
 import type { Movie } from '../types/Movie'
+import { getAllMovies } from '../repositories/movieRepository'
 
-export function createMovie(title: string, genre: string, image: string): Movie {
+export function getMovies(): Movie[] {
+  return getAllMovies()
+}
+
+export function createMovie(
+  title: string,
+  genre: string,
+  image: string
+): Movie {
   return {
     id: Date.now(),
     title,
@@ -10,6 +19,9 @@ export function createMovie(title: string, genre: string, image: string): Movie 
   }
 }
 
-export function removeMovieById(movies: Movie[], id: number): Movie[] {
+export function removeMovieById(
+  movies: Movie[],
+  id: number
+): Movie[] {
   return movies.filter((movie) => movie.id !== id)
 }
