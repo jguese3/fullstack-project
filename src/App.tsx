@@ -1,67 +1,28 @@
-import './App.css'
-import { Routes, Route, NavLink } from 'react-router-dom'
-import MyMovies from './components/my-movies/MyMovies'
+// App — sets up React Router only.
+//
+// Sprint 3 refactor: all shared watchlist state that was prop-drilled from
+// here in Sprint 2 (T.3) has been removed. Each page now owns its own
+// data concerns via the hook-service-repository architecture (T.4).
+// App is now a pure routing shell with no state of its own.
 
-// Jarone Components Imports
-import { AllMovies } from './components/pages/all-movies/AllMovies'
-import type { Movie } from './types/movies'
-import { sampleMovies } from './movies/movieData'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Layout from './components/Layout';
+import CataloguePage from './pages/CataloguePage';
+import WatchlistPage from './pages/WatchlistPage';
+import ReviewsPage from './pages/ReviewsPage';
+import './index.css';
 
-function App() {
-  return (
-    <div className="app">
-      <header className="navbar">
-        <h1 className="logo">MovieFlix</h1>
+const App = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Navigate to="/catalogue" replace />} />
+        <Route path="catalogue" element={<CataloguePage />} />
+        <Route path="watchlist" element={<WatchlistPage />} />
+        <Route path="reviews" element={<ReviewsPage />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+);
 
-        <nav>
-          <ul className="nav-links">
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-
-            <li>
-              <NavLink to="/all-movies">All Movies</NavLink>
-            </li>
-
-            <li>
-              <NavLink to="/my-movies">My Movies</NavLink>
-            </li>
-          </ul>
-        </nav>
-      </header>
-
-      <main className="main-content">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <h2>Welcome to MovieFlix</h2>
-                <p>Discover and manage your favorite movies in one place.</p>
-              </>
-            }
-          />
-
-          <Route
-            path="/all-movies"
-            element={
-              <>
-                <h2>All Movies</h2>
-                <p>Browse all available movies in the platform.</p>
-              </>
-            }
-          />
-
-          <Route path="/my-movies" element={<MyMovies />} />
-        </Routes>
-      </main>
-
-      <footer className="footer">
-        <p>Group Members: Navpreet Singh, Rajandeep Kaur, Jarone Guese</p>
-      </footer>
-    </div>
-  )
-}
-
-export default App
-
+export default App;

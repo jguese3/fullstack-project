@@ -1,22 +1,29 @@
+/**
+ * Jarones All Movies Page Component
+ */
 import type { Movie } from '../../../types/movies';
 import { MovieListDisplay } from '../../movie-list-display/MovieListDisplay';
 import './AllMovies.css';
 
 export function AllMovies({
-    movies,
-    updateMovies,
+  movies,
+  toggleWatchlist,
+  error,
 }: {
-    movies: Movie[];
-    updateMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
+  movies: Movie[];
+  toggleWatchlist: (movieId: number) => Promise<void> | void;
+  error: string | null;
 }) {
-    return (
-      <>
-        <header>
-            <h1>All Movies</h1>
-        </header>
-        <main>
-            <MovieListDisplay movies={movies} updateMovies={updateMovies} />
-        </main>
-        </>
-    )
-} 
+  return (
+    <>
+      <header>
+        <h1>All Movies</h1>
+      </header>
+      <main>
+        {error ? <p className="all-movies__error">{error}</p> : null}
+        <MovieListDisplay movies={movies} onWatchlistClick={toggleWatchlist} />
+      </main>
+    </>
+  );
+}
+ 
