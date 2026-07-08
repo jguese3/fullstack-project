@@ -1,29 +1,26 @@
 {
-  "name": "movieflix",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "complexicon",
+  "workspaces": [
+    "apps/*"
+  ],
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "dev": "concurrently \"npm:start:frontend\" \"npm:start:backend\"",
+    "migrate:backend": "npx --workspace=@complexicon/backend prisma migrate dev",
+    "start:frontend": "npm run dev --workspace=@complexicon/frontend",
+    "start:backend": "npm start --workspace=@complexicon/backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.2"
   },
   "dependencies": {
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "react-router-dom": "^7.17.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.1.0"
+    "dotenv": "^16.4.7"
   }
 }

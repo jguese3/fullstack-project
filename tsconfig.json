@@ -1,23 +1,9 @@
+// This file acts as an entry point for project references
+// The TS compiler finds the referred apps to compile them together
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src"],
-  "references": [
-  { "path": "./tsconfig.node.json"}
-]
+    "files": [],
+    "references": [
+        {"path": "./apps/backend"},
+        {"path": "./apps/frontend"}
+    ]
 }

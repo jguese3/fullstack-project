@@ -1,6 +1,5 @@
 /**
  * Jarones useMovies Hook
- * This custom React hook provides a convenient way for components to access movie data and manage the watchlist status of movies. It utilizes the All Movies Service to fetch movie data and toggle the watchlist status, allowing components to easily integrate movie-related functionality without needing to directly interact with the service layer.
  */
 
 import {useEffect, useState} from 'react';
