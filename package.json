@@ -1,5 +1,5 @@
 {
-  "name": "complexicon",
+  "name": "movieflix",
   "workspaces": [
     "apps/*"
   ],
@@ -7,9 +7,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm:start:frontend\" \"npm:start:backend\"",
-    "migrate:backend": "npx --workspace=@complexicon/backend prisma migrate dev",
-    "start:frontend": "npm run dev --workspace=@complexicon/frontend",
-    "start:backend": "npm start --workspace=@complexicon/backend"
+    "migrate:backend": "npx --workspace=@movieflix/backend prisma migrate dev",
+    "start:frontend": "npm run dev --workspace=@movieflix/frontend",
+    "start:backend": "npm start --workspace=@movieflix/backend"
   },
   "keywords": [],
   "author": "",
