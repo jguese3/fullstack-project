@@ -3,7 +3,7 @@ CREATE TABLE "Movie" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "releaseDate" TIMESTAMP(3) NOT NULL,
+    "releaseDate" TEXT NOT NULL,
     "rating" DOUBLE PRECISION NOT NULL,
     "watchlist" BOOLEAN NOT NULL DEFAULT false,
     "isWatched" BOOLEAN NOT NULL DEFAULT false,
