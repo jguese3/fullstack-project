@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/server.ts",
+    "start": "ts-node server.ts",
     "build": "tsc"
   },
   "keywords": [],
@@ -15,6 +15,7 @@
     "seed": "ts-node --transpile-only prisma/seed.ts"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^22.13.10",
     "@types/swagger-jsdoc": "^6.0.4",
@@ -26,9 +27,8 @@
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
-    "@types/cors": "^2.8.17",
     "@types/morgan": "^1.9.9",
-    "cors": "^2.8.5",
+    "cors": "^2.8.6",
     "express": "^4.22.2",
     "joi": "^17.13.3",
     "morgan": "^1.10.0"

@@ -1,83 +1,109 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './MyMovies.css'
-import { getAllMovies } from '../../repositories/movieRepository'
 
 import {
-  createMovie,
-  removeMovieById,
-} from '../../services/movieService'
+  getAllMovies,
+  addMovie,
+  deleteMovie,
+} from '../../repositories/movieRepository'
 
-/**
- * This component displays movies using data from the movie repository.
- * It uses movieService for movie creation and removal.
- * The repository provides movie data for the component.
- */
 function MyMovies() {
   const [movieTitle, setMovieTitle] = useState('')
   const [movieGenre, setMovieGenre] = useState('')
+  const [movies, setMovies] = useState<any[]>([])
 
-  const [movies, setMovies] = useState(getAllMovies())
+  useEffect(() => {
+    async function loadMovies() {
+      const data = await getAllMovies()
+      setMovies(data)
+    }
 
-  function handleAddMovie(event: any) {
+    loadMovies()
+  }, [])
+
+  async function handleAddMovie(event: any) {
     event.preventDefault()
 
-    const newMovie = createMovie(
+    if (!movieTitle || !movieGenre) {
+      return
+    }
+
+    const newMovie = await addMovie(
       movieTitle,
-      movieGenre,
-      getAllMovies()[0].image
+      movieGenre
     )
 
     setMovies([...movies, newMovie])
+
     setMovieTitle('')
     setMovieGenre('')
   }
 
-  function handleRemoveMovie(id: number) {
-    const updatedMovies = removeMovieById(movies, id)
+  async function handleRemoveMovie(id: number) {
+    await deleteMovie(id)
+
+    const updatedMovies = movies.filter(
+      (movie) => movie.id !== id
+    )
+
     setMovies(updatedMovies)
   }
 
   return (
-    <section className="my-movies" aria-labelledby="my-movies-heading">
+    <section
+      className="my-movies"
+      aria-labelledby="my-movies-heading"
+    >
       <h2 id="my-movies-heading">My Movies</h2>
 
       <p>
-        These are movies saved in the user's personal movie collection.
+        These are movies saved in the user's personal movie
+        collection.
       </p>
 
-      <form className="movie-form" onSubmit={handleAddMovie}>
-        <label htmlFor="movie-title">Movie Title</label>
+      <form
+        className="movie-form"
+        onSubmit={handleAddMovie}
+      >
+        <label htmlFor="movie-title">
+          Movie Title
+        </label>
 
         <input
           id="movie-title"
           type="text"
           value={movieTitle}
-          onChange={(event) => setMovieTitle(event.target.value)}
+          onChange={(event) =>
+            setMovieTitle(event.target.value)
+          }
           placeholder="Enter movie title"
         />
 
-        <label htmlFor="movie-genre">Genre</label>
+        <label htmlFor="movie-genre">
+          Genre
+        </label>
 
         <input
           id="movie-genre"
           type="text"
           value={movieGenre}
-          onChange={(event) => setMovieGenre(event.target.value)}
+          onChange={(event) =>
+            setMovieGenre(event.target.value)
+          }
           placeholder="Enter movie genre"
         />
 
-        <button type="submit">Add Movie</button>
+        <button type="submit">
+          Add Movie
+        </button>
       </form>
 
       <div className="movie-card-list">
         {movies.map((movie) => (
-          <article className="movie-card" key={movie.id}>
-            <img
-              src={movie.image}
-              alt={movie.title}
-              className="movie-image"
-            />
-
+          <article
+            className="movie-card"
+            key={movie.id}
+          >
             <div className="movie-info">
               <h3>{movie.title}</h3>
 
@@ -88,7 +114,9 @@ function MyMovies() {
               <button
                 type="button"
                 className="remove-button"
-                onClick={() => handleRemoveMovie(movie.id)}
+                onClick={() =>
+                  handleRemoveMovie(movie.id)
+                }
               >
                 Remove
               </button>
