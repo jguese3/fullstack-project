@@ -3,6 +3,7 @@
  */
 import type { Movie } from '../../../types/movies';
 import { MovieListDisplay } from '../../movie-list-display/MovieListDisplay';
+// @ts-ignore
 import './AllMovies.css';
 
 export function AllMovies({
