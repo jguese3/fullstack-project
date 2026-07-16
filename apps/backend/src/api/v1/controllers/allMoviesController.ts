@@ -17,4 +17,18 @@ export const getAllMovies = async(
     }
 };
 
-
+export const updateMovie = async(
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try{
+        const updatedMovie = await movieService.updateMovie(
+            Number.parseInt(req.params.id as string),
+            req.body
+        );
+        res.json(successResponse(updatedMovie, "Movie updated successfully"));
+    } catch (error) {
+        next(error);
+    }   
+};

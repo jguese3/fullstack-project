@@ -24,9 +24,11 @@ export function useMovies(dependencies: unknown[], filterFn?: ((movie: Movie) =>
 
     const toggleWatchlist = async (movieId: number) => {
         try {
-            updateMovies((prevMovies) =>
-                MoviesService.toggleWatchlist(movieId, prevMovies)
+            const updatedMovies = await MoviesService.toggleWatchlist(
+                movieId,
+                movies
             );
+            updateMovies([...updatedMovies]);
         } catch (err) {
             setError(`${err}`);
         }
