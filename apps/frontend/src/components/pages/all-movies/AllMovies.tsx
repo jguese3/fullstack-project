@@ -3,7 +3,6 @@
  */
 import type { Movie } from '../../../types/movies';
 import { MovieListDisplay } from '../../movie-list-display/MovieListDisplay';
-// @ts-ignore
 import './AllMovies.css';
 
 export function AllMovies({
@@ -16,15 +15,15 @@ export function AllMovies({
   error: string | null;
 }) {
   return (
-    <>
-      <header>
-        <h1>All Movies</h1>
+    <section className="all-movies">
+      <header className="all-movies__header">
+        <h1 className="all-movies__title">All Movies</h1>
       </header>
-      <main>
+      <main className="all-movies__content">
         {error ? <p className="all-movies__error">{error}</p> : null}
         <MovieListDisplay movies={movies} onWatchlistClick={toggleWatchlist} />
       </main>
-    </>
+    </section>
   );
 }
  

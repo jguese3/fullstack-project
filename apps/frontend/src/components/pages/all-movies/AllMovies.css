@@ -1,3 +1,28 @@
-h1 {
-  color: black;
+.all-movies {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.all-movies__header {
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.75rem;
+}
+
+.all-movies__title {
+  margin: 0;
+  font-size: clamp(2rem, 2.5vw, 3rem);
+  color: #111;
+}
+
+.all-movies__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.all-movies__error {
+  color: #b00020;
+  margin: 0;
 }
