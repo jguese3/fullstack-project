@@ -1,6 +1,6 @@
 import type { Prisma } from "../generated/prisma/client";
 
-export const movieSeedData: Prisma.MovieCreateManyInput[] = [
+export const movieSeedData: Prisma.MoviesCreateManyInput[] = [
   {
     title: "Inception",
     description:

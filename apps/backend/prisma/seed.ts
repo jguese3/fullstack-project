@@ -10,10 +10,10 @@ const prisma = new PrismaClient();
 // see https://www.prisma.io/docs/orm/prisma-migrate/workflows/seeding
 async function main() {
     // clear table
-    await prisma.movie.deleteMany();
+    await prisma.movies.deleteMany();
 
     // insert movies to db
-    const createManyMovies = await prisma.movie.createManyAndReturn(
+    const createManyMovies = await prisma.movies.createManyAndReturn(
         {
             data: movieSeedData,
             skipDuplicates: true

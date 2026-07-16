@@ -1,12 +1,12 @@
-import type { Movie } from "../../types/movies";
+import type { Movies } from "../../types/movies";
 
-type MoviesResponseJSON = { message: string; data: Movie[] };
-type MovieResponseJSON = { message: string; data: Movie };
+type MoviesResponseJSON = { message: string; data: Movies[] };
+type MovieResponseJSON = { message: string; data: Movies };
 
 const BASE_URL = (import.meta as any).env.VITE_API_URL ?? "http://localhost:3000";
 const MOVIES_ENDPOINT = "/all-movies";
 
-export async function fetchMovies(): Promise<Movie[]> {
+export async function fetchMovies(): Promise<Movies[]> {
     const movieResponse: Response = await fetch(
         `${BASE_URL}/api/v1${MOVIES_ENDPOINT}`
     );
@@ -19,7 +19,7 @@ export async function fetchMovies(): Promise<Movie[]> {
     return json.data;
 }
 
-export async function updateMovie(movieId: number, data: { watchlist?: boolean }): Promise<Movie> {
+export async function updateMovie(movieId: number, data: { watchlist?: boolean }): Promise<Movies> {
     const movieResponse: Response = await fetch(
         `${BASE_URL}/api/v1${MOVIES_ENDPOINT}/${movieId}`,
         {

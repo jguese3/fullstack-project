@@ -1,4 +1,4 @@
-import type { Movie } from '../../types/movies';
+import type { Movies } from '../../types/movies';
 import "./movie-card.css"
 
 export function MovieCard(
@@ -9,7 +9,7 @@ export function MovieCard(
         onWatchlistClick,
     }:
     {
-        movie: Movie,
+        movie: Movies,
         isExpanded: boolean,
         onTitleClick: () => void,
         onWatchlistClick: () => void,

@@ -15,7 +15,7 @@ datasource db {
 }
 
 
-model Movie {
+model Movies {
   id          Int      @id @default(autoincrement())
   title       String
   description String
@@ -23,4 +23,5 @@ model Movie {
   rating      Float
   watchlist   Boolean  @default(false)
   isWatched   Boolean  @default(false)
+  @@map("Movie")
 }

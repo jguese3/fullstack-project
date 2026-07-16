@@ -1,9 +1,9 @@
-import { Movie } from "generated/prisma/client";
+import { Movies } from "generated/prisma/client";
 import prisma from "../../../../prisma/client";
 
 export const getAllMovies = async (): Promise<any[]> => {
     try {
-        const movies = await prisma.movie.findMany();
+        const movies = await prisma.movies.findMany();
         return structuredClone(movies);
     } catch (error) {
         throw new Error("Error fetching movies: " + error);
@@ -13,9 +13,9 @@ export const getAllMovies = async (): Promise<any[]> => {
 export const updateMovie = async (
     id: number,
     movieData: { watchlist?: boolean }
-): Promise<Movie> => {
+): Promise<Movies> => {
     try {
-        return await prisma.movie.update({
+        return await prisma.movies.update({
             where: { id },
             data: movieData,
         });

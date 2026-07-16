@@ -1,7 +1,7 @@
 /**
  * Jarones All Movies Page Component
  */
-import type { Movie } from '../../../types/movies';
+import type { Movies } from '../../../types/movies';
 import { MovieListDisplay } from '../../movie-list-display/MovieListDisplay';
 import './AllMovies.css';
 
@@ -10,7 +10,7 @@ export function AllMovies({
   toggleWatchlist,
   error,
 }: {
-  movies: Movie[];
+  movies: Movies[];
   toggleWatchlist: (movieId: number) => Promise<void> | void;
   error: string | null;
 }) {

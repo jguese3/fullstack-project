@@ -1,4 +1,4 @@
-export type Movie = {
+export type Movies = {
   id: number;
   title: string;
   description: string;
