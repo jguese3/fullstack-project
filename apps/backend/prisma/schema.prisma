@@ -1,23 +1,24 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-
+/// Catalogue movies used by All Movies (Jarone)
 model Movies {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   title       String
   description String
   releaseDate String
   rating      Float
-  watchlist   Boolean  @default(false)
-  isWatched   Boolean  @default(false)
-  @@map("Movie")
+  watchlist   Boolean @default(false)
+  isWatched   Boolean @default(false)
+}
+
+/// Personal collection movies used by My Movies (Navpreet)
 model Movie {
   id     Int    @id @default(autoincrement())
   title  String

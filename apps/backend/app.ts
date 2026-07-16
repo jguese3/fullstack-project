@@ -1,8 +1,9 @@
-import express, {Express} from "express";
+import express, { Express } from "express";
 import cors from "cors";
+import movieRoutes from "./routes/movieRoutes";
+import allMoviesRoutes from "./src/api/v1/routes/allMoviesRoutes";
 
 const app: Express = express();
-
 
 // enable CORS for frontend requests
 app.use(
@@ -20,5 +21,6 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/movies", movieRoutes);
+app.use("/api/v1", allMoviesRoutes);
 
 export default app;

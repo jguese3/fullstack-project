@@ -7,3 +7,5 @@ export type Movies = {
   watchlist: boolean;
   isWatched: boolean;
 };
+
+export type Movie = Movies;

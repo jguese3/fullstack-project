@@ -1,4 +1,4 @@
-import { Movie } from "../types";
+import type { Movie } from "../types";
 
 export const ALL_MOVIES: Movie[] = [
   { id: 1, title: "Interstellar", genre: "Sci-Fi", year: 2014, rating: 8.7, description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", poster: "🚀" },

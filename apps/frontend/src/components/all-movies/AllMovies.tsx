@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { WatchlistMovie } from "../../types";
+import type { Dispatch, SetStateAction } from "react";
+import type { WatchlistMovie } from "../../types";
 import { ALL_MOVIES, GENRES } from "../../data/movies";
 import "./AllMovies.css";
 
 interface AllMoviesProps {
   watchlist: WatchlistMovie[];
-  setWatchlist: React.Dispatch<React.SetStateAction<WatchlistMovie[]>>;
+  setWatchlist: Dispatch<SetStateAction<WatchlistMovie[]>>;
 }
 
 type SortOption = "rating-desc" | "rating-asc" | "year-desc" | "year-asc" | "title-asc";

@@ -16,7 +16,7 @@ export default function Nav({ watchlistCount }: NavProps) {
         <li>
           <NavLink
             to="/"
-            className={({ isActive }) =>
+            className={({ isActive }: { isActive: boolean }) =>
               isActive ? "nav__link nav__link--active" : "nav__link"
             }
             end
@@ -27,7 +27,7 @@ export default function Nav({ watchlistCount }: NavProps) {
         <li>
           <NavLink
             to="/all-movies"
-            className={({ isActive }) =>
+            className={({ isActive }: { isActive: boolean }) =>
               isActive ? "nav__link nav__link--active" : "nav__link"
             }
           >
@@ -37,7 +37,7 @@ export default function Nav({ watchlistCount }: NavProps) {
         <li>
           <NavLink
             to="/my-movies"
-            className={({ isActive }) =>
+            className={({ isActive }: { isActive: boolean }) =>
               isActive ? "nav__link nav__link--active" : "nav__link"
             }
           >

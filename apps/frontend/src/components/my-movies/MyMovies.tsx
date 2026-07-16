@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import type { FormEvent } from 'react'
 import './MyMovies.css'
 
 import {
@@ -7,46 +8,59 @@ import {
   deleteMovie,
 } from '../../repositories/movieRepository'
 
+type PersonalMovie = {
+  id: number
+  title: string
+  genre: string
+  status: string
+}
+
 function MyMovies() {
   const [movieTitle, setMovieTitle] = useState('')
   const [movieGenre, setMovieGenre] = useState('')
-  const [movies, setMovies] = useState<any[]>([])
+  const [movies, setMovies] = useState<PersonalMovie[]>([])
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     async function loadMovies() {
-      const data = await getAllMovies()
-      setMovies(data)
+      try {
+        const data = await getAllMovies()
+        setMovies(data)
+        setError(null)
+      } catch (err) {
+        setError(`${err}`)
+      }
     }
 
     loadMovies()
   }, [])
 
-  async function handleAddMovie(event: any) {
+  async function handleAddMovie(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (!movieTitle || !movieGenre) {
       return
     }
 
-    const newMovie = await addMovie(
-      movieTitle,
-      movieGenre
-    )
-
-    setMovies([...movies, newMovie])
-
-    setMovieTitle('')
-    setMovieGenre('')
+    try {
+      const newMovie = await addMovie(movieTitle, movieGenre)
+      setMovies([...movies, newMovie])
+      setMovieTitle('')
+      setMovieGenre('')
+      setError(null)
+    } catch (err) {
+      setError(`${err}`)
+    }
   }
 
   async function handleRemoveMovie(id: number) {
-    await deleteMovie(id)
-
-    const updatedMovies = movies.filter(
-      (movie) => movie.id !== id
-    )
-
-    setMovies(updatedMovies)
+    try {
+      await deleteMovie(id)
+      setMovies(movies.filter((movie) => movie.id !== id))
+      setError(null)
+    } catch (err) {
+      setError(`${err}`)
+    }
   }
 
   return (
@@ -60,6 +74,8 @@ function MyMovies() {
         These are movies saved in the user's personal movie
         collection.
       </p>
+
+      {error ? <p className="my-movies__error">{error}</p> : null}
 
       <form
         className="movie-form"

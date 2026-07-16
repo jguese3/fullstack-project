@@ -1,12 +1,16 @@
+import { useState } from 'react'
 import './App.css'
 import { Routes, Route, NavLink } from 'react-router-dom'
 import MyMovies from './components/my-movies/MyMovies'
+import Homepage from './components/homepage/Homepage'
+import type { WatchlistMovie } from './types'
 
 // Jarone Components Imports
 import { AllMovies } from './components/pages/all-movies/AllMovies'
 import { useMovies } from './hooks/useMovies'
 
 function App() {
+  const [watchlist, setWatchlist] = useState<WatchlistMovie[]>([])
   const { movies, toggleWatchlist, error } = useMovies([], null)
   
   return (
@@ -36,10 +40,7 @@ function App() {
           <Route
             path="/"
             element={
-              <>
-                <h2>Welcome to MovieFlix</h2>
-                <p>Discover and manage your favorite movies in one place.</p>
-              </>
+              <Homepage watchlist={watchlist} setWatchlist={setWatchlist} />
             }
           />
 
@@ -66,4 +67,3 @@ function App() {
 }
 
 export default App
-

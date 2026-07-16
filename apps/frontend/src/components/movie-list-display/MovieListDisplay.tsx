@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { JSX } from 'react';
-import type { Movie } from '../../types/movies';
+import type { Movies } from '../../types/movies';
 import { MovieCard } from '../movie-card/MovieCard';
 import './MovieListDisplay.css';
 
@@ -8,7 +8,7 @@ export function MovieListDisplay({
     movies,
     onWatchlistClick,
 }: {
-    movies: Movie[];
+    movies: Movies[];
     onWatchlistClick: (movieId: number) => Promise<void> | void;
 }) {
     const [expandedMovieId, setExpandedMovieId] = useState<number | null>(null);
