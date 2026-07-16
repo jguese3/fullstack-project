@@ -18,11 +18,10 @@ export async function fetchMovies() {
  * Function to toggle the watchlist status of a movie. If the movie is currently in the watchlist, it will be removed; if it is not in the watchlist, it will be added. This function can be used by components to allow users to manage their watchlist.
  * @param movieId : the ID of the movie to toggle the watchlist status for.
  */
-export async function toggleWatchlist(movieId: number) {
-    const movie: Movie = await MoviesRepo.getMovieById(movieId);
-    if (movie.watchlist) {
-        await MoviesRepo.removeFromWatchlist(movieId);
-    } else {
-        await MoviesRepo.addToWatchlist(movieId);
-    }
+export function toggleWatchlist(movieId: number, movies: Movie[]): Movie[] {
+    return movies.map((movie) =>
+        movie.id === movieId
+            ? { ...movie, watchlist: !movie.watchlist }
+            : movie
+    );
 }
