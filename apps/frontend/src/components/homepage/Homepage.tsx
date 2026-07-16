@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { WatchlistMovie } from "../../types";
+import type { Dispatch, SetStateAction } from "react";
+import type { WatchlistMovie } from "../../types";
 import { ALL_MOVIES, GENRES } from "../../data/movies";
 import "./homepage.css";
 
 interface HomepageProps {
   watchlist: WatchlistMovie[];
-  setWatchlist: React.Dispatch<React.SetStateAction<WatchlistMovie[]>>;
+  setWatchlist: Dispatch<SetStateAction<WatchlistMovie[]>>;
 }
 
 export default function Homepage({
   watchlist,
   setWatchlist,
 }: HomepageProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("All");
   const navigate = useNavigate();
 

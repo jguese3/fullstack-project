@@ -1,6 +1,6 @@
 import "dotenv/config";
 import process from "process";
-import { PrismaClient } from "../generated/prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { movieSeedData } from "./seedData";
 
 const prisma = new PrismaClient();
@@ -16,7 +16,6 @@ async function main() {
     const createManyMovies = await prisma.movies.createManyAndReturn(
         {
             data: movieSeedData,
-            skipDuplicates: true
         }
     );
 

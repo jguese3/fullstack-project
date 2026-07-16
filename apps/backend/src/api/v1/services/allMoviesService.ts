@@ -1,4 +1,4 @@
-import { Movies } from "generated/prisma/client";
+import type { Movies } from "@prisma/client";
 import prisma from "../../../../prisma/client";
 
 export const getAllMovies = async (): Promise<any[]> => {
