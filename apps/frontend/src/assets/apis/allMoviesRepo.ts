@@ -1,43 +1,38 @@
-/**
- * Jarones All Movies Repository
- * This module provides functions to interact with the movie data, including fetching all movies, getting a movie by ID, and managing the watchlist status of movies.
- * The data is currently mocked using a sample dataset, but these functions can be easily adapted to fetch data from an API or database in the future.
- */
-import type { Movie } from '../../types/movies';
-import { sampleMovies } from './mockMovieData';
+import type { Movies } from "../../types/movies";
 
-// Get all movies
-export function fetchMovies(): Movie[] {
-    return sampleMovies;
+type MoviesResponseJSON = { message: string; data: Movies[] };
+type MovieResponseJSON = { message: string; data: Movies };
+
+const BASE_URL = (import.meta as any).env.VITE_API_URL ?? "http://localhost:3000";
+const MOVIES_ENDPOINT = "/all-movies";
+
+export async function fetchMovies(): Promise<Movies[]> {
+    const movieResponse: Response = await fetch(
+        `${BASE_URL}/api/v1${MOVIES_ENDPOINT}`
+    );
+
+    if (!movieResponse.ok) {
+        throw new Error("Failed to fetch movies");
+    }
+
+    const json: MoviesResponseJSON = await movieResponse.json();
+    return json.data;
 }
 
-// Get movie by id
-export function getMovieById(id: number): Movie {
-    const foundMovie = sampleMovies.find(movie => movie.id === id);
-    if (!foundMovie) {
-        throw new Error(`Movie with id ${id} not found`);
-    }
-    return foundMovie;
-}
+export async function updateMovie(movieId: number, data: { watchlist?: boolean }): Promise<Movies> {
+    const movieResponse: Response = await fetch(
+        `${BASE_URL}/api/v1${MOVIES_ENDPOINT}/${movieId}`,
+        {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        }
+    );
 
-// Add movie to watchlist
-export async function addToWatchlist(movieId: number) {
-    const foundMovie = sampleMovies.find(movie => movie.id === movieId);
-    if (!foundMovie) {
-        throw new Error(`Movie with id ${movieId} not found`);
-    } else {
-        foundMovie.watchlist = true;
+    if (!movieResponse.ok) {
+        throw new Error("Failed to update movie");
     }
-    return foundMovie;
-}
 
-// Remove movie from watchlist
-export async function removeFromWatchlist(movieId: number) {
-    const foundMovie = sampleMovies.find(movie => movie.id === movieId);
-    if (!foundMovie) {
-        throw new Error(`Movie with id ${movieId} not found`);
-    } else {
-        foundMovie.watchlist = false;
-    }
-    return foundMovie;
+    const json: MovieResponseJSON = await movieResponse.json();
+    return json.data;
 }

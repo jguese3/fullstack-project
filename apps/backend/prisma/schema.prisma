@@ -8,6 +8,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+model Movies {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  releaseDate String
+  rating      Float
+  watchlist   Boolean  @default(false)
+  isWatched   Boolean  @default(false)
+  @@map("Movie")
 model Movie {
   id     Int    @id @default(autoincrement())
   title  String

@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm:start:frontend\" \"npm:start:backend\"",
+    "dev": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
     "migrate:backend": "npx --workspace=@movieflix/backend prisma migrate dev",
     "start:frontend": "npm run dev --workspace=@movieflix/frontend",
     "start:backend": "npm start --workspace=@movieflix/backend"
@@ -17,6 +17,7 @@
   "type": "commonjs",
   "description": "",
   "devDependencies": {
+    "@types/node": "^26.1.1",
     "concurrently": "^9.1.2",
     "typescript": "^5.8.2"
   },

@@ -2,7 +2,7 @@
  * Jarones useMovies Hook
  */
 
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import * as MoviesService from '../services/allMoviesService';
 import type { Movie } from '../types/movies';
 
@@ -18,16 +18,19 @@ export function useMovies(dependencies: unknown[], filterFn?: ((movie: Movie) =>
             }
             updateMovies([...result]);
         } catch (err) {
-            setError(`${err}`)
+            setError(`${err}`);
         }
     };
 
     const toggleWatchlist = async (movieId: number) => {
         try {
-            await MoviesService.toggleWatchlist(movieId);
-            await fetchMovies();
+            const updatedMovies = await MoviesService.toggleWatchlist(
+                movieId,
+                movies
+            );
+            updateMovies([...updatedMovies]);
         } catch (err) {
-            setError(`${err}`)
+            setError(`${err}`);
         }
     };
 

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Jarones All Movies Service
  * This module provides a service layer that interacts with the All Movies Repository to fetch movie data and manage the watchlist status of movies. It serves as an intermediary between the repository and the components that consume the movie data, allowing for separation of concerns and easier maintenance.
  */
@@ -15,14 +15,21 @@ export async function fetchMovies() {
 }
 
 /**
- * Function to toggle the watchlist status of a movie. If the movie is currently in the watchlist, it will be removed; if it is not in the watchlist, it will be added. This function can be used by components to allow users to manage their watchlist.
+ * Function to toggle the watchlist status of a movie. If the movie is currently in the watchlist, it will be removed; if it is not in the watchlist, it will be added. This function persists the change via the backend API.
  * @param movieId : the ID of the movie to toggle the watchlist status for.
  */
-export async function toggleWatchlist(movieId: number) {
-    const movie: Movie = await MoviesRepo.getMovieById(movieId);
-    if (movie.watchlist) {
-        await MoviesRepo.removeFromWatchlist(movieId);
-    } else {
-        await MoviesRepo.addToWatchlist(movieId);
+export async function toggleWatchlist(movieId: number, movies: Movie[]): Promise<Movie[]> {
+    const movie = movies.find((movie) => movie.id === movieId);
+
+    if (!movie) {
+        throw new Error(`Movie with id ${movieId} not found`);
     }
+
+    const updatedMovie = await MoviesRepo.updateMovie(movieId, {
+        watchlist: !movie.watchlist,
+    });
+
+    return movies.map((movie) =>
+        movie.id === movieId ? updatedMovie : movie
+    );
 }

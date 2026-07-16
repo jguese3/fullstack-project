@@ -7,7 +7,7 @@ import { AllMovies } from './components/pages/all-movies/AllMovies'
 import { useMovies } from './hooks/useMovies'
 
 function App() {
-  const { movies, toggleWatchlist } = useMovies([], null)
+  const { movies, toggleWatchlist, error } = useMovies([], null)
   
   return (
     <div className="app">
@@ -49,6 +49,7 @@ function App() {
               <AllMovies
                 movies={movies}
                 toggleWatchlist={toggleWatchlist}
+                error={error}
               />
             }
           />

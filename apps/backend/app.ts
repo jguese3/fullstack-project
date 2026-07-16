@@ -1,10 +1,18 @@
-import express, { Express } from "express";
+import express, {Express} from "express";
 import cors from "cors";
-import movieRoutes from "./routes/movieRoutes";
 
 const app: Express = express();
 
-app.use(cors());
+
+// enable CORS for frontend requests
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
+
+// allow express to parse json
 app.use(express.json());
 
 app.get("/", (_req, res) => {

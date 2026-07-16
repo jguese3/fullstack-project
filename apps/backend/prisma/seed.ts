@@ -1,5 +1,7 @@
+import "dotenv/config";
+import process from "process";
 import { PrismaClient } from "../generated/prisma/client";
-import { termSeedData } from "./seedData";
+import { movieSeedData } from "./seedData";
 
 const prisma = new PrismaClient();
 
@@ -8,17 +10,17 @@ const prisma = new PrismaClient();
 // see https://www.prisma.io/docs/orm/prisma-migrate/workflows/seeding
 async function main() {
     // clear table
-    await prisma.term.deleteMany();
+    await prisma.movies.deleteMany();
 
-    // insert terms to db
-    const createManyTerms = await prisma.term.createManyAndReturn(
+    // insert movies to db
+    const createManyMovies = await prisma.movies.createManyAndReturn(
         {
-            data: termSeedData,
+            data: movieSeedData,
             skipDuplicates: true
         }
     );
 
-    console.log(`CREATED TERMS: ${createManyTerms}`);
+    console.log(`CREATED MOVIES: ${createManyMovies}`);
 };
 
 main().then(
