@@ -9,6 +9,7 @@ import type { WatchlistMovie } from './types'
 import { AllMovies } from './components/pages/all-movies/AllMovies'
 import { useMovies } from './hooks/useMovies'
 
+
 function App() {
   const [watchlist, setWatchlist] = useState<WatchlistMovie[]>([])
   const { movies, toggleWatchlist, error } = useMovies([], null)
