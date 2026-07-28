@@ -6,12 +6,14 @@ import {
   deleteMovie,
 } from '../controllers/movieController'
 
+import { requireAuth } from '@clerk/express'
+
 const router = express.Router()
 
 router.get('/', getMovies)
 
 router.post('/', createMovie)
 
-router.delete('/:id', deleteMovie)
+router.delete('/:id', requireAuth(), deleteMovie)
 
 export default router
