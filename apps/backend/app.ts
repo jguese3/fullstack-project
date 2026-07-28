@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import cors from "cors";
 import movieRoutes from "./routes/movieRoutes";
 import allMoviesRoutes from "./src/api/v1/routes/allMoviesRoutes";
+import { clerkMiddleware } from "@clerk/express";
 
 const app: Express = express();
 
@@ -12,6 +13,9 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
+
+// add clerk middleware
+app.use(clerkMiddleware());
 
 // allow express to parse json
 app.use(express.json());
