@@ -10,7 +10,7 @@ MovieFlex is a full-stack movie catalogue application built with React, TypeScri
 ### 1. Clone and install
 
 ```bash
-git clone <your-repo-url>
+git clone <Rajandeep-url>
 cd movieflex-sprint5
 npm install
 ```
