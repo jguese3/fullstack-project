@@ -1,8 +1,9 @@
 # MovieFlex — Sprint 5 (Full-Stack + Clerk Auth)
 
 ## Project Summary
-
+```
 MovieFlex is a full-stack movie catalogue application built with React, TypeScript, Express, Prisma, and SQLite. Users can browse movies, maintain a personal watchlist, and write reviews. Authentication is handled by Clerk — watchlists and reviews are per-user and persist across sessions.
+```
 ---
 ## Local Setup
 
