@@ -20,8 +20,11 @@ model Movies {
 
 /// Personal collection movies used by My Movies (Navpreet)
 model Movie {
-  id     Int    @id @default(autoincrement())
-  title  String
-  genre  String
-  status String
+  id      Int    @id @default(autoincrement())
+  title   String
+  genre   String
+  status  String
+  userId  String
+
+  @@index([userId])
 }

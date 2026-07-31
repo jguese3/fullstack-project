@@ -1,4 +1,5 @@
 import express from 'express'
+import { requireAuth } from '@clerk/express'
 
 import {
   getMovies,
@@ -6,13 +7,11 @@ import {
   deleteMovie,
 } from '../controllers/movieController'
 
-import { requireAuth } from '@clerk/express'
-
 const router = express.Router()
 
-router.get('/', getMovies)
+router.get('/', requireAuth(), getMovies)
 
-router.post('/', createMovie)
+router.post('/', requireAuth(), createMovie)
 
 router.delete('/:id', requireAuth(), deleteMovie)
 
