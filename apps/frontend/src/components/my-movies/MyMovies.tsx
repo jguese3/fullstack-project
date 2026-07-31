@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { FormEvent } from 'react'
+import { useAuth } from '@clerk/clerk-react'
 import './MyMovies.css'
 
 import {
@@ -16,6 +17,8 @@ type PersonalMovie = {
 }
 
 function MyMovies() {
+  const { getToken, isSignedIn } = useAuth()
+
   const [movieTitle, setMovieTitle] = useState('')
   const [movieGenre, setMovieGenre] = useState('')
   const [movies, setMovies] = useState<PersonalMovie[]>([])
@@ -23,8 +26,17 @@ function MyMovies() {
 
   useEffect(() => {
     async function loadMovies() {
+      if (!isSignedIn) {
+        setMovies([])
+        return
+      }
+
       try {
-        const data = await getAllMovies()
+        const token = await getToken()
+
+        if (!token) return
+
+        const data = await getAllMovies(token)
         setMovies(data)
         setError(null)
       } catch (err) {
@@ -33,17 +45,24 @@ function MyMovies() {
     }
 
     loadMovies()
-  }, [])
+  }, [getToken, isSignedIn])
 
   async function handleAddMovie(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    if (!movieTitle || !movieGenre) {
-      return
-    }
+    if (!movieTitle || !movieGenre) return
 
     try {
-      const newMovie = await addMovie(movieTitle, movieGenre)
+      const token = await getToken()
+
+      if (!token) return
+
+      const newMovie = await addMovie(
+        movieTitle,
+        movieGenre,
+        token
+      )
+
       setMovies([...movies, newMovie])
       setMovieTitle('')
       setMovieGenre('')
@@ -55,12 +74,29 @@ function MyMovies() {
 
   async function handleRemoveMovie(id: number) {
     try {
-      await deleteMovie(id)
-      setMovies(movies.filter((movie) => movie.id !== id))
+      const token = await getToken()
+
+      if (!token) return
+
+      await deleteMovie(id, token)
+
+      setMovies(
+        movies.filter((movie) => movie.id !== id)
+      )
+
       setError(null)
     } catch (err) {
       setError(`${err}`)
     }
+  }
+
+  if (!isSignedIn) {
+    return (
+      <section className="my-movies">
+        <h2>My Movies</h2>
+        <p>Please log in to view your personal movie collection.</p>
+      </section>
+    )
   }
 
   return (
@@ -71,41 +107,32 @@ function MyMovies() {
       <h2 id="my-movies-heading">My Movies</h2>
 
       <p>
-        These are movies saved in the user's personal movie
-        collection.
+        These are movies saved in your personal movie collection.
       </p>
 
-      {error ? <p className="my-movies__error">{error}</p> : null}
+      {error && <p className="my-movies__error">{error}</p>}
 
       <form
         className="movie-form"
         onSubmit={handleAddMovie}
       >
-        <label htmlFor="movie-title">
-          Movie Title
-        </label>
+        <label htmlFor="movie-title">Movie Title</label>
 
         <input
           id="movie-title"
           type="text"
           value={movieTitle}
-          onChange={(event) =>
-            setMovieTitle(event.target.value)
-          }
+          onChange={(e) => setMovieTitle(e.target.value)}
           placeholder="Enter movie title"
         />
 
-        <label htmlFor="movie-genre">
-          Genre
-        </label>
+        <label htmlFor="movie-genre">Genre</label>
 
         <input
           id="movie-genre"
           type="text"
           value={movieGenre}
-          onChange={(event) =>
-            setMovieGenre(event.target.value)
-          }
+          onChange={(e) => setMovieGenre(e.target.value)}
           placeholder="Enter movie genre"
         />
 
@@ -117,8 +144,8 @@ function MyMovies() {
       <div className="movie-card-list">
         {movies.map((movie) => (
           <article
-            className="movie-card"
             key={movie.id}
+            className="movie-card"
           >
             <div className="movie-info">
               <h3>{movie.title}</h3>
@@ -130,9 +157,7 @@ function MyMovies() {
               <button
                 type="button"
                 className="remove-button"
-                onClick={() =>
-                  handleRemoveMovie(movie.id)
-                }
+                onClick={() => handleRemoveMovie(movie.id)}
               >
                 Remove
               </button>

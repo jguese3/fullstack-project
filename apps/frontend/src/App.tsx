@@ -1,19 +1,24 @@
 import { useState } from 'react'
 import './App.css'
 import { Routes, Route, NavLink } from 'react-router-dom'
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from '@clerk/clerk-react'
+
 import MyMovies from './components/my-movies/MyMovies'
 import Homepage from './components/homepage/Homepage'
 import type { WatchlistMovie } from './types'
-
-// Jarone Components Imports
 import { AllMovies } from './components/pages/all-movies/AllMovies'
 import { useMovies } from './hooks/useMovies'
-
 
 function App() {
   const [watchlist, setWatchlist] = useState<WatchlistMovie[]>([])
   const { movies, toggleWatchlist, error } = useMovies([], null)
-  
+
   return (
     <div className="app">
       <header className="navbar">
@@ -34,6 +39,26 @@ function App() {
             </li>
           </ul>
         </nav>
+
+        <div className="auth-buttons">
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button type="button" className="auth-button">
+                Login
+              </button>
+            </SignInButton>
+
+            <SignUpButton mode="modal">
+              <button type="button" className="auth-button">
+                Register
+              </button>
+            </SignUpButton>
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </div>
       </header>
 
       <main className="main-content">
@@ -41,7 +66,10 @@ function App() {
           <Route
             path="/"
             element={
-              <Homepage watchlist={watchlist} setWatchlist={setWatchlist} />
+              <Homepage
+                watchlist={watchlist}
+                setWatchlist={setWatchlist}
+              />
             }
           />
 
@@ -56,12 +84,18 @@ function App() {
             }
           />
 
-          <Route path="/my-movies" element={<MyMovies />} />
+          <Route
+            path="/my-movies"
+            element={<MyMovies />}
+          />
         </Routes>
       </main>
 
       <footer className="footer">
-        <p>Group Members: Navpreet Singh, Rajandeep Kaur, Jarone Guese</p>
+        <p>
+          Group Members: Navpreet Singh, Rajandeep Kaur,
+          Jarone Guese
+        </p>
       </footer>
     </div>
   )

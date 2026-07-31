@@ -1,45 +1,106 @@
-import { Request, Response } from 'express'
-import { PrismaClient } from '@prisma/client'
+import type { Request, Response } from 'express'
+import { getAuth } from '@clerk/express'
 
-const prisma = new PrismaClient()
+import {
+  getMoviesByUser,
+  createMovieForUser,
+  deleteMovieForUser,
+} from '../services/movieService'
 
 export async function getMovies(
-  _req: Request,
+  req: Request,
   res: Response
 ) {
-  const movies = await prisma.movie.findMany()
+  try {
+    const { userId } = getAuth(req)
 
-  res.json(movies)
+    if (!userId) {
+      res.status(401).json({
+        message: 'You must be logged in.',
+      })
+      return
+    }
+
+    const movies = await getMoviesByUser(userId)
+
+    res.status(200).json(movies)
+  } catch {
+    res.status(500).json({
+      message: 'Unable to get movies.',
+    })
+  }
 }
 
 export async function createMovie(
   req: Request,
   res: Response
 ) {
-  const { title, genre, status } = req.body
+  try {
+    const { userId } = getAuth(req)
 
-  const movie = await prisma.movie.create({
-    data: {
+    if (!userId) {
+      res.status(401).json({
+        message: 'You must be logged in.',
+      })
+      return
+    }
+
+    const { title, genre, status } = req.body
+
+    const movie = await createMovieForUser(
       title,
       genre,
       status,
-    },
-  })
+      userId
+    )
 
-  res.status(201).json(movie)
+    res.status(201).json(movie)
+  } catch {
+    res.status(500).json({
+      message: 'Unable to create movie.',
+    })
+  }
 }
 
 export async function deleteMovie(
   req: Request,
   res: Response
 ) {
-  const id = Number(req.params.id)
+  try {
+    const { userId } = getAuth(req)
 
-  await prisma.movie.delete({
-    where: {
+    if (!userId) {
+      res.status(401).json({
+        message: 'You must be logged in.',
+      })
+      return
+    }
+
+    const id = Number(req.params.id)
+
+    if (Number.isNaN(id)) {
+      res.status(400).json({
+        message: 'Invalid movie ID.',
+      })
+      return
+    }
+
+    const deletedMovie = await deleteMovieForUser(
       id,
-    },
-  })
+      userId
+    )
 
-  res.status(204).send()
+    if (!deletedMovie) {
+      res.status(404).json({
+        message: 'Movie not found.',
+      })
+      return
+    }
+
+    res.status(204).send()
+  } catch {
+    res.status(500).json({
+      message: 'Unable to delete movie.',
+    })
+  }
 }

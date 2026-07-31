@@ -75,4 +75,23 @@ body {
   color: #333333;
 }
 
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #cc0000;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.auth-button:hover {
+  background-color: #a80000;
+}
 
