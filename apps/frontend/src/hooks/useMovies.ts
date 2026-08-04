@@ -3,7 +3,6 @@
  */
 
 import { useEffect, useState } from 'react';
-import { useAuth } from '@clerk/clerk-react';
 import * as MoviesService from '../services/allMoviesService';
 import type { Movies } from '../types/movies';
 
@@ -13,15 +12,13 @@ export function useMovies(
 ) {
     const [movies, updateMovies] = useState<Movies[]>([]);
     const [error, setError] = useState<string | null>(null);
-    const { getToken, isSignedIn } = useAuth();
 
     useEffect(() => {
         let cancelled = false;
 
         const loadMovies = async () => {
             try {
-                const token = isSignedIn ? await getToken() : null;
-                let result = await MoviesService.fetchMovies(token);
+                let result = await MoviesService.fetchMovies();
                 if (filterFn) {
                     result = result.filter(filterFn);
                 }
@@ -43,20 +40,13 @@ export function useMovies(
         };
         // Intentionally keyed by caller-provided dependency list
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dependencies, getToken, isSignedIn]);
+    }, dependencies);
 
     const toggleWatchlist = async (movieId: number) => {
         try {
-            if (!isSignedIn) {
-                setError('Please sign in to manage your watchlist.');
-                return;
-            }
-
-            const token = await getToken();
             const updatedMovies = await MoviesService.toggleWatchlist(
                 movieId,
-                movies,
-                token
+                movies
             );
             updateMovies([...updatedMovies]);
             setError(null);
@@ -65,5 +55,5 @@ export function useMovies(
         }
     };
 
-    return { movies, toggleWatchlist, error, isSignedIn };
+    return { movies, toggleWatchlist, error };
 }

@@ -1,39 +1,71 @@
-import express, { Express } from "express";
-import cors from "cors";
-import movieRoutes from "./routes/movieRoutes";
-import allMoviesRoutes from "./src/api/v1/routes/allMoviesRoutes";
-import { clerkMiddleware } from "@clerk/express";
+import express, {
+  type Express,
+  type NextFunction,
+  type Request,
+  type Response,
+} from 'express'
+import cors from 'cors'
+import {
+  clerkMiddleware,
+  getAuth,
+} from '@clerk/express'
 
-const app: Express = express();
-const clerkPublishableKey =
-  process.env.CLERK_PUBLISHABLE_KEY ||
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+import movieRoutes from './routes/movieRoutes'
+import allMoviesRoutes from './src/api/v1/routes/allMoviesRoutes'
 
-// enable CORS for frontend requests
+const app: Express = express()
+
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    origin: [
+      'http://localhost:5173',
+      'http://127.0.0.1:5173',
+    ],
+    methods: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE',
+      'OPTIONS',
+    ],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+    ],
   })
-);
+)
 
-// add clerk middleware
+app.use(express.json())
+
+app.use(clerkMiddleware())
+
+// Temporary authentication debugging
 app.use(
-  clerkPublishableKey
-    ? clerkMiddleware({ publishableKey: clerkPublishableKey })
-    : clerkMiddleware()
-);
+  (
+    req: Request,
+    _res: Response,
+    next: NextFunction
+  ) => {
+    const auth = getAuth(req)
 
-// allow express to parse json
-app.use(express.json());
+    console.log({
+      path: req.path,
+      hasAuthorizationHeader: Boolean(
+        req.headers.authorization
+      ),
+      userId: auth.userId,
+    })
 
-app.get("/", (_req, res) => {
-  res.send("Got response from backend!");
-});
+    next()
+  }
+)
 
-app.use("/movies", movieRoutes);
-app.use("/api/v1", allMoviesRoutes);
+app.get('/', (_req: Request, res: Response) => {
+  res.send('Got response from backend!')
+})
 
-export default app;
+app.use('/movies', movieRoutes)
+
+app.use('/api/v1', allMoviesRoutes)
+
+export default app

@@ -1,27 +1,38 @@
 {
   "name": "@movieflix/backend",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "dev": "tsx watch server.ts",
-    "build": "tsc --project tsconfig.json --noEmit false",
-    "start": "node dist/server.js",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsx server.ts",
+    "build": "tsc"
   },
-  "dependencies": {
-    "@clerk/express": "^2.1.50",
-    "@prisma/client": "^6.19.3",
-    "cors": "^2.8.6",
-    "dotenv": "^16.6.1",
-    "express": "^4.22.2",
-    "prisma": "^6.19.3"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "prisma": {
+    "seed": "ts-node --transpile-only prisma/seed.ts"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.5",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.0",
-    "@types/node": "^22.0.0",
-    "tsx": "^4.20.3",
-    "typescript": "^5.8.2"
+    "@types/node": "^22.20.1",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "prisma": "^6.19.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.23.5"
+  },
+  "dependencies": {
+    "@clerk/express": "^2.1.47",
+    "@prisma/client": "^6.19.3",
+    "@types/morgan": "^1.9.9",
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
+    "joi": "^17.13.3",
+    "morgan": "^1.10.0"
   }
 }

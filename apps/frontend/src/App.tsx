@@ -1,23 +1,70 @@
 import { useState } from 'react'
 import './App.css'
-import { Routes, Route, NavLink } from 'react-router-dom'
+
+import {
+  NavLink,
+  Route,
+  Routes,
+  useNavigate,
+} from 'react-router-dom'
+
 import {
   SignedIn,
   SignedOut,
   SignInButton,
   SignUpButton,
   UserButton,
+  useAuth,
 } from '@clerk/clerk-react'
 
-import MyMovies from './components/my-movies/MyMovies'
 import Homepage from './components/homepage/Homepage'
-import type { WatchlistMovie } from './types'
+import MyMovies from './components/my-movies/MyMovies'
 import { AllMovies } from './components/pages/all-movies/AllMovies'
+
 import { useMovies } from './hooks/useMovies'
+import { addMovie } from './repositories/movieRepository'
+
+import type { WatchlistMovie } from './types'
+
+type AddableMovie = {
+  title: string
+  genre?: string
+}
 
 function App() {
-  const [watchlist, setWatchlist] = useState<WatchlistMovie[]>([])
-  const { movies, toggleWatchlist, error, isSignedIn } = useMovies([], null)
+  const [watchlist, setWatchlist] =
+    useState<WatchlistMovie[]>([])
+
+  const { movies, error } = useMovies([], null)
+
+  const { getToken, isSignedIn } = useAuth()
+  const navigate = useNavigate()
+
+  async function handleAddToMyMovies(
+    movie: AddableMovie
+  ) {
+    if (!isSignedIn) {
+      alert('Please log in before adding a movie.')
+      return
+    }
+
+    const token = await getToken({
+      skipCache: true,
+    })
+
+    if (!token) {
+      alert('Unable to get your login session.')
+      return
+    }
+
+    await addMovie(
+      movie.title,
+      movie.genre ?? 'Unknown',
+      token
+    )
+
+    navigate('/my-movies')
+  }
 
   return (
     <div className="app">
@@ -27,15 +74,21 @@ function App() {
         <nav>
           <ul className="nav-links">
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/">
+                Home
+              </NavLink>
             </li>
 
             <li>
-              <NavLink to="/all-movies">All Movies</NavLink>
+              <NavLink to="/all-movies">
+                All Movies
+              </NavLink>
             </li>
 
             <li>
-              <NavLink to="/my-movies">My Movies</NavLink>
+              <NavLink to="/my-movies">
+                My Movies
+              </NavLink>
             </li>
           </ul>
         </nav>
@@ -43,13 +96,19 @@ function App() {
         <div className="auth-buttons">
           <SignedOut>
             <SignInButton mode="modal">
-              <button type="button" className="auth-button">
+              <button
+                type="button"
+                className="auth-button"
+              >
                 Login
               </button>
             </SignInButton>
 
             <SignUpButton mode="modal">
-              <button type="button" className="auth-button">
+              <button
+                type="button"
+                className="auth-button"
+              >
                 Register
               </button>
             </SignUpButton>
@@ -69,6 +128,9 @@ function App() {
               <Homepage
                 watchlist={watchlist}
                 setWatchlist={setWatchlist}
+                addToMyMovies={
+                  handleAddToMyMovies
+                }
               />
             }
           />
@@ -78,9 +140,10 @@ function App() {
             element={
               <AllMovies
                 movies={movies}
-                toggleWatchlist={toggleWatchlist}
+                addToMyMovies={
+                  handleAddToMyMovies
+                }
                 error={error}
-                isSignedIn={isSignedIn}
               />
             }
           />
@@ -94,8 +157,8 @@ function App() {
 
       <footer className="footer">
         <p>
-          Group Members: Navpreet Singh, Rajandeep Kaur,
-          Jarone Guese
+          Group Members: Navpreet Singh,
+          Rajandeep Kaur, Jarone Guese
         </p>
       </footer>
     </div>

@@ -1,5 +1,4 @@
 import express from 'express'
-import { requireAuth } from '@clerk/express'
 
 import {
   getMovies,
@@ -9,10 +8,8 @@ import {
 
 const router = express.Router()
 
-router.get('/', requireAuth(), getMovies)
-
-router.post('/', requireAuth(), createMovie)
-
-router.delete('/:id', requireAuth(), deleteMovie)
+router.get('/', getMovies)
+router.post('/', createMovie)
+router.delete('/:id', deleteMovie)
 
 export default router

@@ -1,16 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import { getAuth } from "@clerk/express";
 import * as movieService from "../services/allMoviesService";
 import { successResponse } from "../models/responseModel"
 
 export const getAllMovies = async(
-    req: Request,
+    _req: Request,
     res: Response,
     next: NextFunction
 ): Promise<void> => {
     try{
-        const auth = getAuth(req);
-        const movies = await movieService.getAllMovies(auth.userId ?? undefined);
+        const movies = await movieService.getAllMovies();
         res.status(200).json(
             successResponse(movies, "Movies retrieved succesfully")
         );
@@ -25,11 +23,9 @@ export const updateMovie = async(
     next: NextFunction
 ): Promise<void> => {
     try{
-        const auth = getAuth(req);
         const updatedMovie = await movieService.updateMovie(
             Number.parseInt(req.params.id as string),
-            req.body,
-            auth.userId ?? undefined
+            req.body
         );
         res.json(successResponse(updatedMovie, "Movie updated successfully"));
     } catch (error) {

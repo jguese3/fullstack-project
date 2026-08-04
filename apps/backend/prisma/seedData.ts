@@ -7,8 +7,8 @@ export const movieSeedData: Prisma.MoviesCreateManyInput[] = [
       "A skilled thief enters dreams to steal secrets but is given a chance at redemption through one final mission.",
     releaseDate: "2010-07-16T00:00:00.000Z",
     rating: 8.8,
-    watchlist: false,
-    isWatched: false,
+    watchlist: true,
+    isWatched: true,
   },
   {
     title: "Interstellar",
@@ -17,7 +17,7 @@ export const movieSeedData: Prisma.MoviesCreateManyInput[] = [
     releaseDate: "2014-11-07T00:00:00.000Z",
     rating: 8.7,
     watchlist: false,
-    isWatched: false,
+    isWatched: true,
   },
   {
     title: "The Dark Knight",
@@ -26,7 +26,7 @@ export const movieSeedData: Prisma.MoviesCreateManyInput[] = [
     releaseDate: "2008-07-18T00:00:00.000Z",
     rating: 9.0,
     watchlist: false,
-    isWatched: false,
+    isWatched: true,
   },
   {
     title: "Dune",
@@ -34,7 +34,7 @@ export const movieSeedData: Prisma.MoviesCreateManyInput[] = [
       "A young nobleman must protect the most valuable resource in the galaxy on a dangerous desert planet.",
     releaseDate: "2021-10-22T00:00:00.000Z",
     rating: 8.1,
-    watchlist: false,
+    watchlist: true,
     isWatched: false,
   },
   {
@@ -43,7 +43,7 @@ export const movieSeedData: Prisma.MoviesCreateManyInput[] = [
       "A laundromat owner discovers she must connect with alternate universe versions of herself to save reality.",
     releaseDate: "2022-03-25T00:00:00.000Z",
     rating: 8.0,
-    watchlist: false,
+    watchlist: true,
     isWatched: false,
   },
   {
@@ -53,7 +53,7 @@ export const movieSeedData: Prisma.MoviesCreateManyInput[] = [
     releaseDate: "2019-05-30T00:00:00.000Z",
     rating: 8.5,
     watchlist: false,
-    isWatched: false,
+    isWatched: true,
   },
   {
     title: "Spider-Man: Into the Spider-Verse",
@@ -61,8 +61,8 @@ export const movieSeedData: Prisma.MoviesCreateManyInput[] = [
       "Teenager Miles Morales becomes Spider-Man and joins forces with heroes from other dimensions.",
     releaseDate: "2018-12-14T00:00:00.000Z",
     rating: 8.4,
-    watchlist: false,
-    isWatched: false,
+    watchlist: true,
+    isWatched: true,
   },
   {
     title: "Top Gun: Maverick",

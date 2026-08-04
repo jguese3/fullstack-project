@@ -1,34 +1,53 @@
-import { useState } from 'react';
-import type { JSX } from 'react';
-import type { Movies } from '../../types/movies';
-import { MovieCard } from '../movie-card/MovieCard';
-import './MovieListDisplay.css';
+import { useState } from 'react'
+
+import type { JSX } from 'react'
+import type { Movies } from '../../types/movies'
+
+import { MovieCard } from '../movie-card/MovieCard'
+
+import './MovieListDisplay.css'
+
+type MovieListDisplayProps = {
+  movies: Movies[]
+
+  onAddToMyMovies: (
+    movie: Movies
+  ) => Promise<void>
+}
 
 export function MovieListDisplay({
-    movies,
-    onWatchlistClick,
-    isSignedIn,
-}: {
-    movies: Movies[];
-    onWatchlistClick: (movieId: number) => Promise<void> | void;
-    isSignedIn: boolean;
-}) {
-    const [expandedMovieId, setExpandedMovieId] = useState<number | null>(null);
+  movies,
+  onAddToMyMovies,
+}: MovieListDisplayProps) {
+  const [
+    expandedMovieId,
+    setExpandedMovieId,
+  ] = useState<number | null>(null)
 
-    const movieListItems: JSX.Element[] = movies.map((movie) => {
-        return (
-            <MovieCard
-                key={movie.id}
-                movie={movie}
-                isExpanded={movie.id === expandedMovieId}
-                isSignedIn={isSignedIn}
-                onTitleClick={() => {
-                    setExpandedMovieId(movie.id === expandedMovieId ? null : movie.id);
-                }}
-                onWatchlistClick={() => onWatchlistClick(movie.id)}
-            />
-        );
-    });
+  const movieListItems: JSX.Element[] =
+    movies.map((movie) => (
+      <MovieCard
+        key={movie.id}
+        movie={movie}
+        isExpanded={
+          movie.id === expandedMovieId
+        }
+        onTitleClick={() => {
+          setExpandedMovieId(
+            movie.id === expandedMovieId
+              ? null
+              : movie.id
+          )
+        }}
+        onAddToMyMovies={() =>
+          onAddToMyMovies(movie)
+        }
+      />
+    ))
 
-    return <div className="movie-list-display">{movieListItems}</div>;
+  return (
+    <div className="movie-list-display">
+      {movieListItems}
+    </div>
+  )
 }
