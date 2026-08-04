@@ -5,6 +5,9 @@ import allMoviesRoutes from "./src/api/v1/routes/allMoviesRoutes";
 import { clerkMiddleware } from "@clerk/express";
 
 const app: Express = express();
+const clerkPublishableKey =
+  process.env.CLERK_PUBLISHABLE_KEY ||
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 // enable CORS for frontend requests
 app.use(
@@ -17,7 +20,11 @@ app.use(
 );
 
 // add clerk middleware
-app.use(clerkMiddleware());
+app.use(
+  clerkPublishableKey
+    ? clerkMiddleware({ publishableKey: clerkPublishableKey })
+    : clerkMiddleware()
+);
 
 // allow express to parse json
 app.use(express.json());

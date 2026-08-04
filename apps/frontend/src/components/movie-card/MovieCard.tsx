@@ -29,10 +29,6 @@ export function MovieCard(
     const isWatched = watchedByClicks || movie.isWatched;
 
     const handleCardClick = () => {
-        if (isSignedIn) {
-            return;
-        }
-
         const nextCount = clickCount + 1;
         setClickCount(nextCount);
         if (nextCount >= 4) {
