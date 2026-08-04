@@ -7,9 +7,11 @@ import './MovieListDisplay.css';
 export function MovieListDisplay({
     movies,
     onWatchlistClick,
+    isSignedIn,
 }: {
     movies: Movies[];
     onWatchlistClick: (movieId: number) => Promise<void> | void;
+    isSignedIn: boolean;
 }) {
     const [expandedMovieId, setExpandedMovieId] = useState<number | null>(null);
 
@@ -19,6 +21,7 @@ export function MovieListDisplay({
                 key={movie.id}
                 movie={movie}
                 isExpanded={movie.id === expandedMovieId}
+                isSignedIn={isSignedIn}
                 onTitleClick={() => {
                     setExpandedMovieId(movie.id === expandedMovieId ? null : movie.id);
                 }}

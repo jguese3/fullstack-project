@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Movies } from '../../types/movies';
 import "./movie-card.css"
 
@@ -5,30 +6,51 @@ export function MovieCard(
     {
         movie,
         isExpanded,
+        isSignedIn,
         onTitleClick,
         onWatchlistClick,
     }:
     {
         movie: Movies,
         isExpanded: boolean,
+        isSignedIn: boolean,
         onTitleClick: () => void,
         onWatchlistClick: () => void,
     }
 ) {
+    const [clickCount, setClickCount] = useState(0);
+    const [watchedByClicks, setWatchedByClicks] = useState(false);
     const releaseDate = new Date(movie.releaseDate).toLocaleDateString(undefined, {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
     });
 
+    const isWatched = watchedByClicks || movie.isWatched;
+
+    const handleCardClick = () => {
+        if (!isSignedIn) {
+            return;
+        }
+
+        const nextCount = clickCount + 1;
+        setClickCount(nextCount);
+        if (nextCount >= 4) {
+            setWatchedByClicks(true);
+        }
+        onTitleClick();
+    };
+
     return (
-        <div className="movie-card" onClick={onTitleClick}>
+        <div className="movie-card" onClick={handleCardClick}>
             <div className="movie-card-top">
                 <div>
                     <h3>{movie.title}</h3>
-                    <span className={`movie-card-status ${movie.isWatched ? 'movie-card-status--watched' : 'movie-card-status--unwatched'}`}>
-                        {movie.isWatched ? 'Watched' : 'Not watched'}
-                    </span>
+                    {isSignedIn ? (
+                        <span className={`movie-card-status ${isWatched ? 'movie-card-status--watched' : 'movie-card-status--unwatched'}`}>
+                            {isWatched ? 'Watched' : 'Not watched'}
+                        </span>
+                    ) : null}
                 </div>
             </div>
             {isExpanded ? (
@@ -40,15 +62,17 @@ export function MovieCard(
                     </ul>
                 </div>
             ) : null}
-            <button
-                className="movie-card-button"
-                onClick={(event) => {
-                    event.stopPropagation();
-                    onWatchlistClick();
-                }}
-            >
-                {movie.watchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}
-            </button>
+            {isSignedIn ? (
+                <button
+                    className="movie-card-button"
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        onWatchlistClick();
+                    }}
+                >
+                    {movie.watchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}
+                </button>
+            ) : null}
         </div>
     );
 }
