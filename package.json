@@ -3,16 +3,17 @@
   "private": true,
   "version": "1.0.0",
   "workspaces": [
-    "frontend",
-    "backend"
+    "apps/frontend",
+    "apps/backend"
   ],
   "scripts": {
-    "dev:backend": "npm run dev --workspace=backend",
-    "dev:frontend": "npm run dev --workspace=frontend",
-    "build:backend": "npm run build --workspace=backend",
-    "build:frontend": "npm run build --workspace=frontend",
-    "prisma:generate": "npm run prisma:generate --workspace=backend",
-    "prisma:migrate": "npm run prisma:migrate --workspace=backend"
+    "dev": "npm run dev --workspace=apps/frontend",
+    "dev:backend": "npm run dev --workspace=apps/backend",
+    "dev:frontend": "npm run dev --workspace=apps/frontend",
+    "build:backend": "npm run build --workspace=apps/backend",
+    "build:frontend": "npm run build --workspace=apps/frontend",
+    "prisma:generate": "npm run prisma:generate --workspace=apps/backend",
+    "prisma:migrate": "npm run prisma:migrate --workspace=apps/backend"
   },
   "dependencies": {
     "@clerk/express": "^2.1.50",
