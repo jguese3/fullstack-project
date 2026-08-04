@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { useAuth } from '@clerk/clerk-react'
 import './MyMovies.css'
@@ -17,84 +17,161 @@ type PersonalMovie = {
 }
 
 function MyMovies() {
-  const { getToken, isSignedIn } = useAuth()
+  const { getToken, isSignedIn, isLoaded } = useAuth()
 
   const [movieTitle, setMovieTitle] = useState('')
   const [movieGenre, setMovieGenre] = useState('')
   const [movies, setMovies] = useState<PersonalMovie[]>([])
   const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     async function loadMovies() {
+      if (!isLoaded) {
+        return
+      }
+
       if (!isSignedIn) {
         setMovies([])
+        setError(null)
         return
       }
 
       try {
-        const token = await getToken()
+        setIsLoading(true)
 
-        if (!token) return
+        const token = await getToken({
+          skipCache: true,
+        })
+
+        if (!token) {
+          setError('Unable to get your login session.')
+          return
+        }
 
         const data = await getAllMovies(token)
-        setMovies(data)
+
+        setMovies(
+          Array.isArray(data)
+            ? (data as PersonalMovie[])
+            : []
+        )
+
         setError(null)
       } catch (err) {
-        setError(`${err}`)
+        setError(
+          err instanceof Error
+            ? err.message
+            : 'Unable to load movies.'
+        )
+      } finally {
+        setIsLoading(false)
       }
     }
 
-    loadMovies()
-  }, [getToken, isSignedIn])
+    void loadMovies()
+  }, [getToken, isLoaded, isSignedIn])
 
-  async function handleAddMovie(event: FormEvent<HTMLFormElement>) {
+  async function handleAddMovie(
+    event: FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault()
 
-    if (!movieTitle || !movieGenre) return
+    const title = movieTitle.trim()
+    const genre = movieGenre.trim()
+
+    if (!title || !genre) {
+      setError('Please enter both movie title and genre.')
+      return
+    }
 
     try {
-      const token = await getToken()
+      setIsLoading(true)
 
-      if (!token) return
+      const token = await getToken({
+        skipCache: true,
+      })
+
+      if (!token) {
+        setError('Unable to get your login session.')
+        return
+      }
 
       const newMovie = await addMovie(
-        movieTitle,
-        movieGenre,
+        title,
+        genre,
         token
       )
 
-      setMovies([...movies, newMovie])
+      setMovies((currentMovies) => [
+        ...currentMovies,
+        newMovie as PersonalMovie,
+      ])
+
       setMovieTitle('')
       setMovieGenre('')
       setError(null)
     } catch (err) {
-      setError(`${err}`)
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Unable to add movie.'
+      )
+    } finally {
+      setIsLoading(false)
     }
   }
 
   async function handleRemoveMovie(id: number) {
     try {
-      const token = await getToken()
+      setIsLoading(true)
 
-      if (!token) return
+      const token = await getToken({
+        skipCache: true,
+      })
+
+      if (!token) {
+        setError('Unable to get your login session.')
+        return
+      }
 
       await deleteMovie(id, token)
 
-      setMovies(
-        movies.filter((movie) => movie.id !== id)
+      setMovies((currentMovies) =>
+        currentMovies.filter(
+          (movie) => movie.id !== id
+        )
       )
 
       setError(null)
     } catch (err) {
-      setError(`${err}`)
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Unable to remove movie.'
+      )
+    } finally {
+      setIsLoading(false)
     }
+  }
+
+  if (!isLoaded) {
+    return (
+      <section className="my-movies">
+        <h2>My Movies</h2>
+        <p>Loading...</p>
+      </section>
+    )
   }
 
   if (!isSignedIn) {
     return (
       <section className="my-movies">
         <h2>My Movies</h2>
-        <p>Please log in to view your personal movie collection.</p>
+        <p>
+          Please log in to view your personal movie
+          collection.
+        </p>
       </section>
     )
   }
@@ -107,37 +184,55 @@ function MyMovies() {
       <h2 id="my-movies-heading">My Movies</h2>
 
       <p>
-        These are movies saved in your personal movie collection.
+        These are movies saved in your personal movie
+        collection.
       </p>
 
-      {error && <p className="my-movies__error">{error}</p>}
+      {error && (
+        <p className="my-movies__error">
+          Error: {error}
+        </p>
+      )}
 
       <form
         className="movie-form"
         onSubmit={handleAddMovie}
       >
-        <label htmlFor="movie-title">Movie Title</label>
+        <label htmlFor="movie-title">
+          Movie Title
+        </label>
 
         <input
           id="movie-title"
           type="text"
           value={movieTitle}
-          onChange={(e) => setMovieTitle(e.target.value)}
+          onChange={(event) =>
+            setMovieTitle(event.target.value)
+          }
           placeholder="Enter movie title"
+          disabled={isLoading}
         />
 
-        <label htmlFor="movie-genre">Genre</label>
+        <label htmlFor="movie-genre">
+          Genre
+        </label>
 
         <input
           id="movie-genre"
           type="text"
           value={movieGenre}
-          onChange={(e) => setMovieGenre(e.target.value)}
+          onChange={(event) =>
+            setMovieGenre(event.target.value)
+          }
           placeholder="Enter movie genre"
+          disabled={isLoading}
         />
 
-        <button type="submit">
-          Add Movie
+        <button
+          type="submit"
+          disabled={isLoading}
+        >
+          {isLoading ? 'Please wait...' : 'Add Movie'}
         </button>
       </form>
 
@@ -157,7 +252,10 @@ function MyMovies() {
               <button
                 type="button"
                 className="remove-button"
-                onClick={() => handleRemoveMovie(movie.id)}
+                disabled={isLoading}
+                onClick={() =>
+                  void handleRemoveMovie(movie.id)
+                }
               >
                 Remove
               </button>
