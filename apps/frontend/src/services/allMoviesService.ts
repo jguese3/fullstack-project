@@ -9,8 +9,8 @@ import type { Movies } from '../types/movies';
  * Requests all movies from the repository and returns them. This function can be used by components to get the list of movies to display.
  * @returns A promise resolving to the list of all movies.
  */
-export async function fetchMovies() {
-    const movies = await MoviesRepo.fetchMovies();
+export async function fetchMovies(token?: string | null) {
+    const movies = await MoviesRepo.fetchMovies(token);
     return movies;
 }
 
@@ -18,7 +18,11 @@ export async function fetchMovies() {
  * Function to toggle the watchlist status of a movie. If the movie is currently in the watchlist, it will be removed; if it is not in the watchlist, it will be added. This function persists the change via the backend API.
  * @param movieId : the ID of the movie to toggle the watchlist status for.
  */
-export async function toggleWatchlist(movieId: number, movies: Movies[]): Promise<Movies[]> {
+export async function toggleWatchlist(
+    movieId: number,
+    movies: Movies[],
+    token?: string | null
+): Promise<Movies[]> {
     const movie = movies.find((movie) => movie.id === movieId);
 
     if (!movie) {
@@ -27,7 +31,7 @@ export async function toggleWatchlist(movieId: number, movies: Movies[]): Promis
 
     const updatedMovie = await MoviesRepo.updateMovie(movieId, {
         watchlist: !movie.watchlist,
-    });
+    }, token);
 
     return movies.map((movie) =>
         movie.id === movieId ? updatedMovie : movie
