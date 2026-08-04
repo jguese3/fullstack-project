@@ -6,9 +6,26 @@ type MovieResponseJSON = { message: string; data: Movies };
 const BASE_URL = (import.meta as any).env.VITE_API_URL ?? "http://localhost:3000";
 const MOVIES_ENDPOINT = "/all-movies";
 
-export async function fetchMovies(): Promise<Movies[]> {
+function buildHeaders(token?: string | null, includeJsonContentType = false) {
+    const headers: Record<string, string> = {};
+
+    if (includeJsonContentType) {
+        headers["Content-Type"] = "application/json";
+    }
+
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
+    }
+
+    return headers;
+}
+
+export async function fetchMovies(token?: string | null): Promise<Movies[]> {
     const movieResponse: Response = await fetch(
-        `${BASE_URL}/api/v1${MOVIES_ENDPOINT}`
+        `${BASE_URL}/api/v1${MOVIES_ENDPOINT}`,
+        {
+            headers: buildHeaders(token),
+        }
     );
 
     if (!movieResponse.ok) {
@@ -19,12 +36,16 @@ export async function fetchMovies(): Promise<Movies[]> {
     return json.data;
 }
 
-export async function updateMovie(movieId: number, data: { watchlist?: boolean }): Promise<Movies> {
+export async function updateMovie(
+    movieId: number,
+    data: { watchlist?: boolean },
+    token?: string | null
+): Promise<Movies> {
     const movieResponse: Response = await fetch(
         `${BASE_URL}/api/v1${MOVIES_ENDPOINT}/${movieId}`,
         {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: buildHeaders(token, true),
             body: JSON.stringify(data),
         }
     );
