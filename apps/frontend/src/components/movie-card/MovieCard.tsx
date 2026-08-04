@@ -29,7 +29,7 @@ export function MovieCard(
     const isWatched = watchedByClicks || movie.isWatched;
 
     const handleCardClick = () => {
-        if (!isSignedIn) {
+        if (isSignedIn) {
             return;
         }
 

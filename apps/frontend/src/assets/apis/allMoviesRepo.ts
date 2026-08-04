@@ -6,10 +6,12 @@ type MovieResponseJSON = { message: string; data: Movies };
 const BASE_URL = (import.meta as any).env.VITE_API_URL ?? "http://localhost:3000";
 const MOVIES_ENDPOINT = "/all-movies";
 
-function buildHeaders(token?: string | null) {
-    const headers: Record<string, string> = {
-        "Content-Type": "application/json",
-    };
+function buildHeaders(token?: string | null, includeJsonContentType = false) {
+    const headers: Record<string, string> = {};
+
+    if (includeJsonContentType) {
+        headers["Content-Type"] = "application/json";
+    }
 
     if (token) {
         headers.Authorization = `Bearer ${token}`;
@@ -43,7 +45,7 @@ export async function updateMovie(
         `${BASE_URL}/api/v1${MOVIES_ENDPOINT}/${movieId}`,
         {
             method: "PUT",
-            headers: buildHeaders(token),
+            headers: buildHeaders(token, true),
             body: JSON.stringify(data),
         }
     );

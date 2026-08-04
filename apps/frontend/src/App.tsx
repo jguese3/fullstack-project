@@ -17,7 +17,7 @@ import { useMovies } from './hooks/useMovies'
 
 function App() {
   const [watchlist, setWatchlist] = useState<WatchlistMovie[]>([])
-  const { movies, toggleWatchlist, error } = useMovies([], null)
+  const { movies, toggleWatchlist, error, isSignedIn } = useMovies([], null)
 
   return (
     <div className="app">
@@ -80,6 +80,7 @@ function App() {
                 movies={movies}
                 toggleWatchlist={toggleWatchlist}
                 error={error}
+                isSignedIn={isSignedIn}
               />
             }
           />
