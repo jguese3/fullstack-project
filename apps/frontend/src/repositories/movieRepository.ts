@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/movies'
+const BASE_URL = (import.meta as any).env.VITE_API_URL ?? "http://localhost:3000"
+const API_URL = `${BASE_URL}/movies`
 
 function createAuthHeaders(token: string) {
   return {

@@ -12,15 +12,27 @@ import {
 
 import movieRoutes from './routes/movieRoutes'
 import allMoviesRoutes from './src/api/v1/routes/allMoviesRoutes'
-
+const test = process.env.FRONTEND_URL
 const app: Express = express()
 
 app.use(
-  cors({
-    origin: [
-      'http://localhost:5173',
-      'http://127.0.0.1:5173',
-    ],
+  cors(
+    
+    {
+    origin: function(origin, callback) {
+      const allowedOrigins = ['http://localhost:5173',
+                              'http://127.0.0.1:5173',
+                              process.env.FRONTEND_URL,]
+      
+        //If the origin is in the allowedOrigins array 
+        // or if there is no origin (for server-to-server requests),
+        // allow the request
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
     methods: [
       'GET',
       'POST',
@@ -32,7 +44,10 @@ app.use(
       'Content-Type',
       'Authorization',
     ],
-  })
+  }
+
+
+)
 )
 
 app.use(express.json())
