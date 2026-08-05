@@ -14,41 +14,34 @@ import movieRoutes from './routes/movieRoutes'
 import allMoviesRoutes from './src/api/v1/routes/allMoviesRoutes'
 
 const app: Express = express()
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:5174',
+  'http://127.0.0.1:5174',
+  process.env.FRONTEND_URL,
+].filter(Boolean) as string[];
 
 app.use(
-  cors(
-    
-    {
-    origin: function(origin, callback) {
-      const allowedOrigins = ['http://localhost:5173',
-                              'http://127.0.0.1:5173',
-                              process.env.FRONTEND_URL,]
-      
-        //If the origin is in the allowedOrigins array 
-        // or if there is no origin (for server-to-server requests),
-        // allow the request
-      if (allowedOrigins.includes(origin) || !origin) {
-        callback(null, true)
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        //maybe then *
+        callback(null, origin ?? '*');
       } else {
-        callback(new Error('Not allowed by CORS'))
+        callback(new Error('Not allowed by CORS'));
       }
     },
-    methods: [
-      'GET',
-      'POST',
-      'PUT',
-      'DELETE',
-      'OPTIONS',
-    ],
-    allowedHeaders: [
-      'Content-Type',
-      'Authorization',
-    ],
-  }
+    //maybe this
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
+//maybe this
+app.options('*', cors());
 
-)
-)
 
 app.use(express.json())
 
