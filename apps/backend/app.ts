@@ -12,7 +12,7 @@ import {
 
 import movieRoutes from './routes/movieRoutes'
 import allMoviesRoutes from './src/api/v1/routes/allMoviesRoutes'
-const test = process.env.FRONTEND_URL
+
 const app: Express = express()
 
 app.use(
